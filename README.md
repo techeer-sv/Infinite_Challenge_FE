@@ -6,7 +6,7 @@
 
 ### 참고자료
 
-- 과제 요구 UI [[피그마 링크]](https://www.figma.com/embed?embed_host=notion&url=https%3A%2F%2Fwww.figma.com%2Ffile%2F2I7T132M48F6FbhJHwIB0r%2FUntitled%3Ftype%3Ddesign%26node-id%3D0%3A1%26mode%3Ddesign%26t%3DB6PHfUwC2TYk4ac8-1)
+- 과제 요구 UI [[피그마 링크]](https://www.figma.com/file/2I7T132M48F6FbhJHwIB0r/Techeer-Infinite-Challenge-FE?type=design&node-id=0-1&mode=design&t=5ogNibInEDjJplQd-0)
 
 - API
   - [https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name={검색어}](https://api.clinicaltrialskorea.com/api/v1/search-conditions/?name={검색어)
