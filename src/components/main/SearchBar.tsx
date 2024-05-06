@@ -1,26 +1,21 @@
+import useSearchBar from "../../hooks/useSearchBar";
 import SearchIcon from "../../common/Image/SearchIcon";
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 
 const SearchBar = () => {
-  const inputRef = React.useRef<HTMLInputElement>(null);
-
-  const [isFocused, setIsFocused] = useState(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
-
-  const handleInputFocus = () => {
-    inputRef.current?.focus();
-  };
+  const {
+    isActive,
+    handleFocus,
+    handleBlur,
+    handleInputFocus,
+    inputRef,
+    value,
+    onChange,
+  } = useSearchBar();
 
   return (
-    <Wrapper isFocused={isFocused} onClick={() => handleInputFocus()}>
+    <Wrapper $isActive={isActive} onClick={() => handleInputFocus()}>
       <SearchIcon width="16" height="16" fill="#BBBBBB" />
       <Input
         ref={inputRef}
@@ -28,6 +23,8 @@ const SearchBar = () => {
         placeholder="질환명을 입력해주세요."
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onChange={onChange}
+        value={value}
       />
       <SearchButton>
         <SearchIcon width="21" height="21" fill="#FFFFFF" />
@@ -38,7 +35,7 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-const Wrapper = styled.div<{ isFocused: boolean }>`
+const Wrapper = styled.div<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
   max-width: 486px;
@@ -47,8 +44,8 @@ const Wrapper = styled.div<{ isFocused: boolean }>`
   border: 1px solid #e5e5e5;
   border-radius: 42px;
   padding-left: 24px;
-  border: ${({ isFocused }) =>
-    isFocused ? "2px solid #007be9" : "2px solid transparent"};
+  border: ${({ $isActive }) =>
+    $isActive ? "2px solid #007be9" : "2px solid transparent"};
 `;
 
 const Input = styled.input`
