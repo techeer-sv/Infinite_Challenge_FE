@@ -21,16 +21,16 @@ time, mark, audio, video {
 	border: 0;
 	font: inherit;
 	vertical-align: baseline;
-	font-size: 62.5%;
 	font-family: 'Inria Sans';
+
 	
 
 }
-@media (max-width: 1023px) {
+@media (min-width: 1023px) {
 html { font-size: 62.5% } 
 }
  
-@media (max-width: 767px) { 
+@media (min-width: 550px) and (max-width: 767px) { 
 	html { font-size: 50%; }  
 }
  
@@ -44,6 +44,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	font-size: 1.6rem;
 }
 ol, ul {
 	list-style: none;
