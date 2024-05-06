@@ -1,7 +1,12 @@
 import React from "react";
+import SearchBar from "../components/main/SearchBar";
 
 const Main = () => {
-  return <div>메인페이지 입니다</div>;
+  return (
+    <div>
+      <SearchBar />
+    </div>
+  );
 };
 
 export default Main;

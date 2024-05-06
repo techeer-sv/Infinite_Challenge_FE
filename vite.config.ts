@@ -15,6 +15,10 @@ export default defineConfig({
         find: "@components",
         replacement: path.resolve(__dirname, "src/components"),
       },
+      {
+        find: "@commons",
+        replacement: path.resolve(__dirname, "src/commons"),
+      },
     ],
   },
 });

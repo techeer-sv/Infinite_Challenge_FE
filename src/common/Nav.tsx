@@ -14,7 +14,7 @@ const Nav = () => {
   return (
     <Wrapper>
       <InnerBar>
-        <Logo onClick={() => gotoPage("./")} width="138" height="25" />
+        <Logo onClick={() => gotoPage("./")} width="13.8" height="2.5" />
         <Lists>
           {NAV_LISTS.map((list) => {
             return (

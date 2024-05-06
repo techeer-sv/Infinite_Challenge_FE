@@ -1,15 +1,10 @@
-import React from "react";
+import { IconProps } from "@/src/types/icon";
 
-interface LogoProps extends React.SVGProps<SVGSVGElement> {
-  width: string;
-  height: string;
-}
-
-const Logo = ({ width, height, ...rest }: LogoProps) => {
+const Logo = ({ width, height, ...rest }: IconProps) => {
   return (
     <svg
-      width={width}
-      height={height}
+      width={`${width}rem`}
+      height={`${height}rem`}
       viewBox="0 0 138 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

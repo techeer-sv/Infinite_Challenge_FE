@@ -30,7 +30,7 @@ time, mark, audio, video {
 html { font-size: 62.5% } 
 }
  
-@media (min-width: 550px) and (max-width: 767px) { 
+@media (min-width: 550px) and (max-width: 1023px) { 
 	html { font-size: 50%; }  
 }
  

@@ -4,7 +4,8 @@
     "paths": {
       "@/*": ["*"],
       "@pages/*": ["pages/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@commons/*": ["commons/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
