@@ -39,11 +39,11 @@ const Wrapper = styled.div<{ $isActive: boolean }>`
   display: flex;
   align-items: center;
   max-width: 486px;
-  width: 100%;
+  width: 90%;
   height: 70px;
-  border: 1px solid #e5e5e5;
   border-radius: 42px;
   padding-left: 24px;
+  background-color: rgba(255, 255, 255, 1);
   border: ${({ $isActive }) =>
     $isActive ? "2px solid #007be9" : "2px solid transparent"};
 `;
@@ -53,6 +53,7 @@ const Input = styled.input`
   margin-left: 10px;
   border: none;
   font-size: 16px;
+  background-color: transparent;
 
   input::placeholder {
     color: #bbbbbb;
