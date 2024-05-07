@@ -1,11 +1,11 @@
-import BookmarkIcon from "./icons/BookmarkIcon";
+import BookmarkIcon from "@/components/icons/BookmarkIcon";
 
-interface ToggleButtonProps {
+interface IToggleButton {
   checked: boolean;
   onClick?: () => void;
 }
 
-const ToggleButton: React.FC<ToggleButtonProps> = ({ checked, onClick }) => {
+const ToggleButton = ({ checked, onClick }: IToggleButton) => {
   return (
     <button
       onClick={onClick}
