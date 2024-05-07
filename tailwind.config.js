@@ -30,8 +30,17 @@ export default {
       ],
     },
     colors: {
+      primary: "#007BE9",
       lightGray: "#EEF0F2",
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        ":root": {
+          "--color-primary": theme("colors.primary"),
+        },
+      });
+    },
+  ],
 };
