@@ -5,7 +5,6 @@ const useInput = () => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    console.log(e.target.value);
   };
 
   return { value, setValue, onChange };

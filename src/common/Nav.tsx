@@ -68,5 +68,6 @@ const List = styled.li`
 
   & > a {
     text-decoration: none;
+    color: #000000;
   }
 `;

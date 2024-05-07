@@ -21,5 +21,5 @@ export const getClient = (() => {
 })();
 
 export const QueryKeys: AnyOBJ = {
-  hello: "hello",
+  SEARCH: "search",
 };

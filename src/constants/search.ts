@@ -1,3 +1,9 @@
+export const DEBOUNCE_LIMIT_TIME = 500;
+
+export const ARROW_UP = "ArrowUp";
+export const ARROW_DOWN = "ArrowDown";
+export const ENTER = "Enter";
+
 export const BANNER_TITLE = "국내 모든 임상시험 검색하고\n온라인으로 참여하기";
 
 export const NO_RESULT_MESSAGE = "현재 모집 중인 임상시험이 없습니다.";

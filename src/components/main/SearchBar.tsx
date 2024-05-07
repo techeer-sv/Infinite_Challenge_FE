@@ -1,7 +1,7 @@
 import useSearchBar from "../../hooks/useSearchBar";
 import SearchIcon from "../../common/Image/SearchIcon";
-import React from "react";
 import { styled } from "styled-components";
+import DropBox from "./DropBox";
 
 const SearchBar = () => {
   const {
@@ -12,6 +12,9 @@ const SearchBar = () => {
     inputRef,
     value,
     onChange,
+    onKeyDownInputText,
+    selectedIndex,
+    searchLists,
   } = useSearchBar();
 
   return (
@@ -24,11 +27,29 @@ const SearchBar = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
+        onKeyDown={onKeyDownInputText}
         value={value}
+        autoComplete="off"
+        spellCheck="false"
       />
       <SearchButton>
         <SearchIcon width="21" height="21" fill="#FFFFFF" />
       </SearchButton>
+      {value.length === 0 && isActive && (
+        <DropBox
+          selectedIndex={selectedIndex}
+          searchLists={searchLists}
+          type="최근검색어"
+        />
+      )}
+      {value.length > 0 && isActive && (
+        <DropBox
+          selectedIndex={selectedIndex}
+          searchLists={searchLists}
+          type="추천검색어"
+          value={value}
+        />
+      )}
     </Wrapper>
   );
 };
@@ -36,6 +57,7 @@ const SearchBar = () => {
 export default SearchBar;
 
 const Wrapper = styled.div<{ $isActive: boolean }>`
+  position: relative;
   display: flex;
   align-items: center;
   max-width: 486px;
