@@ -40,6 +40,7 @@ const Wrapper = styled.nav`
   inset: 0px 0px 0px auto;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(20px);
+  background-color: #ffffff;
   z-index: 100;
 `;
 
@@ -48,7 +49,6 @@ const InnerBar = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  background-color: #ffffff;
   max-width: 1000px;
   height: 100%;
   padding: 0 20px;

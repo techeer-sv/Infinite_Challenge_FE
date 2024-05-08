@@ -3,7 +3,6 @@ import {
   NO_RESULT_MESSAGE_DESCRIPTION,
 } from "../../constants/search";
 import NoSearchIcon from "../../common/Image/NoSearchIcon";
-import React from "react";
 import { styled } from "styled-components";
 
 const NoResult = () => {

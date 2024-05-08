@@ -11,7 +11,7 @@ const SearchContent = ({ item, value = "" }: SearchContentProps) => {
   useEffect(() => {
     const unDuplicateLength = item.name.replace(value, "").length;
     setMatchLength(item.name.length - unDuplicateLength);
-  }, [value]);
+  }, [item.name, value]);
 
   return (
     <Wrapper>
@@ -33,4 +33,5 @@ const Wrapper = styled.div`
 
 const SearchHighlightDiv = styled.div`
   font-weight: bold;
+  color: #007be9;
 `;

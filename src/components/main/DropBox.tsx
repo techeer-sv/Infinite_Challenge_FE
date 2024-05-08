@@ -1,5 +1,5 @@
 import SearchIcon from "../../common/Image/SearchIcon";
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { SetStateAction } from "react";
 import { styled } from "styled-components";
 import SearchContent from "./SearchContent";
 
@@ -67,6 +67,7 @@ const Wrapper = styled.div`
   padding: 16px 24px;
   gap: 0px;
   box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
 `;
 
 const DropTitle = styled.div`

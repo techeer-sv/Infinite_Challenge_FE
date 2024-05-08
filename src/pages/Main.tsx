@@ -1,16 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import SearchBar from "../components/main/SearchBar";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { BANNER_TITLE } from "../constants/search";
 import useInput from "../hooks/useInput";
 import { useGetSearchResults } from "../remote/query/main";
+import NoResult from "../components/main/NoResult";
+import ResultList from "../components/main/ResultList";
+import { ResultListType } from "../types/searchResult";
 
 const Main = () => {
   const { value, setValue, onChange } = useInput();
 
   const { data: searchResults, refetch } = useGetSearchResults(value);
+
   console.log(searchResults);
-  console.log(value);
   return (
     <Page>
       <SearchBanner>
@@ -22,6 +26,17 @@ const Main = () => {
           onChange={onChange}
         />
       </SearchBanner>
+      {!searchResults?.count && <NoResult />}
+
+      <ResultsContainer>
+        {searchResults?.results?.map(
+          (result: ResultListType, index: number) => (
+            <ResultItem key={result.id} index={index}>
+              <ResultList searchResult={result} />
+            </ResultItem>
+          )
+        )}
+      </ResultsContainer>
     </Page>
   );
 };
@@ -49,4 +64,37 @@ const BannerTitle = styled.h3`
 
   white-space: pre-line;
   margin-bottom: 40px;
+`;
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const ResultsContainer = styled.div`
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 10px;
+  justify-content: center;
+
+  padding: 20px 10px 20px 10px;
+`;
+
+const ResultItem = styled.div<{ index: number }>`
+  animation: ${fadeIn} 0.5s ease-in-out forwards;
+  opacity: 0;
+  margin-top: 20px;
+
+  &:nth-child(${(props) => props.index + 1}) {
+    animation-delay: ${(props) => props.index * 0.5}s;
+  }
 `;
