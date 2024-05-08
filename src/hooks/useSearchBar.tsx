@@ -95,6 +95,7 @@ const useSearchBar = ({ value, setValue, onChange, refetch }: UseSearchBar) => {
   };
 
   const handleClickResult = () => {
+    if (!value) return;
     const data = localStorage.getItem("search");
     if (data !== null) {
       const localSearchData = JSON.parse(data);
