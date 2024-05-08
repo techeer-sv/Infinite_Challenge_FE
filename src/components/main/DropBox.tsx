@@ -1,6 +1,7 @@
 import SearchIcon from "../../common/Image/SearchIcon";
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import { styled } from "styled-components";
+import SearchContent from "./SearchContent";
 
 interface DropBoxProps {
   type: "추천검색어" | "최근검색어";
@@ -16,13 +17,12 @@ const DropBox = ({
   selectedIndex,
   setValue,
 }: DropBoxProps) => {
-  console.log(searchLists);
   return (
     <Wrapper>
       {value && (
         <CurrentTiping>
           <SearchIcon width="16" height="16" fill="#BBBBBB" />
-          <SearchContent>{value}</SearchContent>
+          <SearchNotContentS>{value}</SearchNotContentS>
         </CurrentTiping>
       )}
 
@@ -38,7 +38,7 @@ const DropBox = ({
               $isSelected={selectedIndex === index}
             >
               <SearchIcon width="16" height="16" fill="#BBBBBB" />
-              <SearchContent key={item.id}>{item.name}</SearchContent>
+              <SearchContent value={value} item={item}></SearchContent>
             </DropList>
           );
         })}
@@ -92,7 +92,7 @@ const DropList = styled.div<{ $isSelected?: boolean }>`
   }
 `;
 
-const SearchContent = styled.span`
+const SearchNotContentS = styled.span`
   display: flex;
   align-items: center;
   font-size: 14.4px;
