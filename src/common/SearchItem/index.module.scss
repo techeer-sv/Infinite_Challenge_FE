@@ -31,7 +31,6 @@
 .clickable {
   width: 2rem;
   height: 2rem;
-  cursor: pointer;
 }
 
 .bookmark {
@@ -79,7 +78,8 @@
 }
 
 .tag {
-  padding: 7px 10px;
+  font-size: 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 2rem;
   background-color: #eef0f2;
 }
