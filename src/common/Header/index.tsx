@@ -8,7 +8,9 @@ export default function Header() {
   return (
     <header className={cx("header")}>
       <div className={cx("inner-header")}>
-        <img src={logo} alt="logo" />
+        <a href="/">
+          <img src={logo} alt="logo" />
+        </a>
 
         <nav>
           <ul>

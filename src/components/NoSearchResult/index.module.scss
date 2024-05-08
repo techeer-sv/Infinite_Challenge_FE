@@ -1,0 +1,33 @@
+.container {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  background-color: #ffffff;
+}
+
+.search-icon {
+  width: 7.2rem;
+  height: 7.2rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.8rem;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2.4rem;
+  text-align: center;
+  color: #6a737b;
+  white-space: pre-wrap;
+}

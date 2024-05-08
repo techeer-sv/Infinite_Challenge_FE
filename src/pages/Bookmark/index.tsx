@@ -1,9 +1,10 @@
-import classNames from "classnames/bind";
-import style from "./index.module.scss";
+// import classNames from "classnames/bind";
+// import style from "./index.module.scss";
 import Header from "@/common/Header";
 import SearchItem from "@/common/SearchItem";
+import SearchItemLayout from "@/common/SearchItem/SearchItemLayout";
 
-const cx = classNames.bind(style);
+// const cx = classNames.bind(style);
 
 // 임시 데이터
 const testDate = {
@@ -34,11 +35,11 @@ export default function Bookmark() {
     <>
       <Header />
 
-      <div className={cx("list-container")}>
+      <SearchItemLayout>
         <SearchItem item={testDate} />
         <SearchItem item={testDate} />
         <SearchItem item={testDate} />
-      </div>
+      </SearchItemLayout>
     </>
   );
 }

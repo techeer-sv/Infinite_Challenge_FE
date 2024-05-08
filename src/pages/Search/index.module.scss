@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.blue-container {
+  width: 100%;
+  height: 46.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 4rem;
+
+  background-color: #cae9ff;
+}
+
+.title {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 5.2rem;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.result-container {
+  flex-grow: 1;
+  display: flex;
+}
