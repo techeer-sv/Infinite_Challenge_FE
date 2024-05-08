@@ -1,7 +1,8 @@
+import { MouseEvent, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import style from "./index.module.scss";
+import smallSearch from "@/assets/images/smallSearch.svg";
 import search from "@/assets/images/search.svg";
-import { useRef, useState } from "react";
 import Dropdown from "../Dropdown";
 
 const cx = classNames.bind(style);
@@ -15,8 +16,31 @@ export default function SearchInput() {
     inputRef.current?.focus();
   };
 
+  const submitSearch = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+
+    if (!searchValue) return;
+    if (searchValue) {
+      const recentSearches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
+      const updatedSearches = [
+        searchValue,
+        ...recentSearches.filter((item: string) => item !== searchValue),
+      ];
+      localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
+
+      setSearchValue("");
+      setIsFocused(false);
+    }
+  };
+
   return (
     <div className={cx("search-container", { focused: isFocused })} onClick={focusInput}>
+      {!isFocused && (
+        <div className={cx("icon-box")}>
+          <img className={cx("small-icon")} src={smallSearch} alt="smallSearch" />
+        </div>
+      )}
+
       <input
         className={cx("input-container")}
         ref={inputRef}
@@ -28,11 +52,11 @@ export default function SearchInput() {
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
       />
-      <button className={cx("search-button")}>
-        <img src={search} alt="search icon" />
+      <button className={cx("search-button")} onClick={(e) => submitSearch(e)}>
+        <img className={cx("search-icon")} src={search} alt="search icon" />
       </button>
 
-      {isFocused && <Dropdown />}
+      {isFocused && <Dropdown searchValue={searchValue} />}
     </div>
   );
 }
