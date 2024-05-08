@@ -14,7 +14,6 @@ const Main = () => {
 
   const { data: searchResults, refetch } = useGetSearchResults(value);
 
-  console.log(searchResults);
   return (
     <Page>
       <SearchBanner>

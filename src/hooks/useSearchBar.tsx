@@ -99,8 +99,8 @@ const useSearchBar = ({ value, setValue, onChange, refetch }: UseSearchBar) => {
     if (data !== null) {
       const localSearchData = JSON.parse(data);
       const updatedData = [
-        ...localSearchData,
         { name: value, id: localSearchData.length },
+        ...localSearchData,
       ];
       localStorage.setItem("search", JSON.stringify(updatedData));
       setRecentData(updatedData);
