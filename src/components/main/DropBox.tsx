@@ -1,5 +1,5 @@
 import SearchIcon from "../../common/Image/SearchIcon";
-import React from "react";
+import React, { SetStateAction } from "react";
 import { styled } from "styled-components";
 
 interface DropBoxProps {
@@ -7,8 +7,16 @@ interface DropBoxProps {
   value?: string;
   searchLists: { name: string; id: number }[];
   selectedIndex: number;
+  setValue: React.Dispatch<SetStateAction<string>>;
 }
-const DropBox = ({ type, value, searchLists, selectedIndex }: DropBoxProps) => {
+const DropBox = ({
+  type,
+  value,
+  searchLists,
+  selectedIndex,
+  setValue,
+}: DropBoxProps) => {
+  console.log(searchLists);
   return (
     <Wrapper>
       {value && (
@@ -22,15 +30,21 @@ const DropBox = ({ type, value, searchLists, selectedIndex }: DropBoxProps) => {
       <DropLists>
         {searchLists?.map((item, index) => {
           return (
-            <DropList key={item.id} $isSelected={selectedIndex === index}>
+            <DropList
+              onClick={() => {
+                setValue(() => item.name);
+              }}
+              key={item.id}
+              $isSelected={selectedIndex === index}
+            >
               <SearchIcon width="16" height="16" fill="#BBBBBB" />
               <SearchContent key={item.id}>{item.name}</SearchContent>
             </DropList>
           );
         })}
-        {!searchLists && (
+        {searchLists?.length === 0 && (
           <DropList>
-            <SearchNotContent>최근 검색어가 없습니다</SearchNotContent>
+            <SearchNotContent>{type}가 없습니다</SearchNotContent>
           </DropList>
         )}
       </DropLists>
@@ -71,6 +85,11 @@ const DropList = styled.div<{ $isSelected?: boolean }>`
   border-radius: 5px 0px 0px 0px;
   background-color: ${({ $isSelected }) =>
     $isSelected ? "#f0f0f0" : "transparent"};
+
+  cursor: pointer;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 `;
 
 const SearchContent = styled.span`

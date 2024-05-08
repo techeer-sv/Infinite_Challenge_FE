@@ -2,13 +2,25 @@ import React from "react";
 import SearchBar from "../components/main/SearchBar";
 import styled from "styled-components";
 import { BANNER_TITLE } from "../constants/search";
+import useInput from "../hooks/useInput";
+import { useGetSearchResults } from "../remote/query/main";
 
 const Main = () => {
+  const { value, setValue, onChange } = useInput();
+
+  const { data: searchResults, refetch } = useGetSearchResults(value);
+  console.log(searchResults);
+  console.log(value);
   return (
     <Page>
       <SearchBanner>
         <BannerTitle>{BANNER_TITLE}</BannerTitle>
-        <SearchBar />
+        <SearchBar
+          refetch={refetch}
+          value={value}
+          setValue={setValue}
+          onChange={onChange}
+        />
       </SearchBanner>
     </Page>
   );

@@ -2,29 +2,42 @@ import useSearchBar from "../../hooks/useSearchBar";
 import SearchIcon from "../../common/Image/SearchIcon";
 import { styled } from "styled-components";
 import DropBox from "./DropBox";
+import { SetStateAction } from "react";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  value: string;
+  setValue: React.Dispatch<SetStateAction<string>>;
+  refetch: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const SearchBar = ({ value, setValue, onChange, refetch }: SearchBarProps) => {
   const {
     isActive,
-    handleFocus,
     handleBlur,
     handleInputFocus,
     inputRef,
-    value,
-    onChange,
     onKeyDownInputText,
     selectedIndex,
     searchLists,
-  } = useSearchBar();
+    handleMouseDown,
+    handleMouseUp,
+    handleClickResult,
+    recentData,
+  } = useSearchBar({ value, setValue, onChange, refetch });
 
   return (
-    <Wrapper $isActive={isActive} onClick={() => handleInputFocus()}>
+    <Wrapper
+      $isActive={isActive}
+      onClick={() => handleInputFocus()}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+    >
       <SearchIcon width="16" height="16" fill="#BBBBBB" />
       <Input
         ref={inputRef}
         type="text"
         placeholder="질환명을 입력해주세요."
-        onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={onChange}
         onKeyDown={onKeyDownInputText}
@@ -32,18 +45,20 @@ const SearchBar = () => {
         autoComplete="off"
         spellCheck="false"
       />
-      <SearchButton>
+      <SearchButton onClick={() => handleClickResult()}>
         <SearchIcon width="21" height="21" fill="#FFFFFF" />
       </SearchButton>
       {value.length === 0 && isActive && (
         <DropBox
+          setValue={setValue}
           selectedIndex={selectedIndex}
-          searchLists={searchLists}
+          searchLists={recentData}
           type="최근검색어"
         />
       )}
       {value.length > 0 && isActive && (
         <DropBox
+          setValue={setValue}
           selectedIndex={selectedIndex}
           searchLists={searchLists}
           type="추천검색어"
@@ -76,7 +91,7 @@ const Input = styled.input`
   border: none;
   font-size: 16px;
   background-color: transparent;
-
+  pointer-events: none;
   input::placeholder {
     color: #bbbbbb;
   }

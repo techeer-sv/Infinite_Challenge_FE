@@ -1,16 +1,25 @@
-import React, { useEffect, useState } from "react";
-import useInput from "./useInput";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { SetStateAction, useEffect, useState } from "react";
 import { ARROW_DOWN, ARROW_UP, ENTER } from "../constants/search";
 import { useGetSearchData } from "../remote/query/main";
 import { useDebouncedSearch } from "./useDebouncedSearch";
 
-const useSearchBar = () => {
+type UseSearchBar = {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  setValue: React.Dispatch<SetStateAction<string>>;
+  refetch: () => void;
+};
+
+const useSearchBar = ({ value, setValue, onChange, refetch }: UseSearchBar) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
-  const { value, setValue, onChange } = useInput();
-  const [isActive, seIsActive] = useState(false);
+  const [recentData, setRecentData] = useState<{ name: string; id: number }[]>(
+    []
+  );
+  const [isActive, setIsActive] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
+  const [isMouseDown, setIsMouseDown] = useState(false);
   const { debouncedValue, setValue: debouncedSearch } = useDebouncedSearch();
 
   useEffect(() => {
@@ -20,24 +29,45 @@ const useSearchBar = () => {
   const { data: searchLists } = useGetSearchData(debouncedValue);
 
   const handleFocus = () => {
-    seIsActive(true);
+    setIsActive(true);
+  };
+
+  const handleMouseDown = () => {
+    setIsMouseDown(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
   };
 
   const handleBlur = () => {
-    seIsActive(false);
+    setTimeout(() => {
+      if (!isMouseDown) {
+        setIsActive(false);
+      }
+    }, 100);
   };
 
   const handleInputFocus = () => {
     inputRef.current?.focus();
+    handleFocus();
   };
 
   const getUpIndex = (prevIndex: number) => {
-    if (prevIndex <= 0) return searchLists.length - 1;
+    if (value) {
+      if (prevIndex <= 0) return searchLists.length - 1;
+    } else {
+      if (prevIndex <= 0) return recentData.length - 1;
+    }
     return prevIndex - 1;
   };
 
   const getDownIndex = (prevIndex: number) => {
-    if (prevIndex >= searchLists.length - 1) return 0;
+    if (value) {
+      if (prevIndex >= searchLists.length - 1) return 0;
+    } else {
+      if (prevIndex >= recentData.length - 1) return 0;
+    }
     return prevIndex + 1;
   };
 
@@ -46,8 +76,12 @@ const useSearchBar = () => {
       setSelectedIndex((prevIndex) => getUpIndex(prevIndex));
     if (key === ARROW_DOWN)
       setSelectedIndex((prevIndex) => getDownIndex(prevIndex));
-    if (key === ENTER && selectedIndex !== -1) {
+    if (key === ENTER && selectedIndex !== -1 && value) {
       setValue(() => searchLists[selectedIndex].name);
+    } else {
+      if (key === ENTER && selectedIndex !== -1 && !value) {
+        setValue(() => recentData[selectedIndex].name);
+      }
     }
   };
 
@@ -59,6 +93,32 @@ const useSearchBar = () => {
       }
     }
   };
+
+  const handleClickResult = () => {
+    const data = localStorage.getItem("search");
+    if (data !== null) {
+      const localSearchData = JSON.parse(data);
+      const updatedData = [
+        ...localSearchData,
+        { name: value, id: localSearchData.length },
+      ];
+      localStorage.setItem("search", JSON.stringify(updatedData));
+      setRecentData(updatedData);
+    } else {
+      localStorage.setItem("search", JSON.stringify([{ name: value, id: 0 }]));
+      setRecentData([{ name: value, id: 0 }]);
+    }
+
+    refetch();
+  };
+
+  useEffect(() => {
+    const data = localStorage.getItem("search");
+    if (data !== null) {
+      const localSearchData = JSON.parse(data);
+      setRecentData(localSearchData);
+    }
+  }, []);
 
   useEffect(() => {
     setSelectedIndex(-1);
@@ -75,6 +135,10 @@ const useSearchBar = () => {
     onKeyDownInputText,
     selectedIndex,
     searchLists,
+    handleClickResult,
+    handleMouseUp,
+    handleMouseDown,
+    recentData,
   };
 };
 
