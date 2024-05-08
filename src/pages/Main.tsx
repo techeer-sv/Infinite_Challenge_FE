@@ -8,11 +8,16 @@ import { useGetSearchResults } from "../remote/query/main";
 import NoResult from "../components/main/NoResult";
 import ResultList from "../components/main/ResultList";
 import { ResultListType } from "../types/searchResult";
+import Modal from "../common/Modal";
+import Overlay from "../common/Overlay";
+import useHandleModal from "../hooks/useHandleModal";
 
 const Main = () => {
   const { value, setValue, onChange } = useInput();
 
   const { data: searchResults, refetch } = useGetSearchResults(value);
+
+  const { isOpen, closeModal } = useHandleModal();
 
   return (
     <Page>
@@ -36,6 +41,11 @@ const Main = () => {
           )
         )}
       </ResultsContainer>
+      {isOpen && (
+        <Overlay>
+          <Modal closeModal={closeModal}>즐겨찾기에서 제거하시겠습니까?</Modal>
+        </Overlay>
+      )}
     </Page>
   );
 };

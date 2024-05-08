@@ -23,6 +23,7 @@ const Wrapper = styled.section`
   align-items: center;
   justify-content: center;
   max-width: 1000px;
+  width: 90%;
   height: 322px;
   margin: 0 auto;
 `;
