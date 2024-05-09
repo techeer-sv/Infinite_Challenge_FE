@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 interface SearchContentProps {
@@ -6,17 +5,19 @@ interface SearchContentProps {
   value?: string;
 }
 const SearchContent = ({ item, value = "" }: SearchContentProps) => {
-  const [matchLength, setMatchLength] = useState<number>(0);
+  // const [matchLength, setMatchLength] = useState<number>(0);
 
-  useEffect(() => {
-    const unDuplicateLength = item.name.replace(value, "").length;
-    setMatchLength(item.name.length - unDuplicateLength);
-  }, [item.name, value]);
+  // useEffect(() => {
+  //   const unDuplicateLength = item.name.replace(value, "").length;
+  //   setMatchLength(item.name.length - unDuplicateLength);
+  // }, [item.name, value]);
 
   return (
     <Wrapper>
-      <SearchHighlightDiv>{item.name.slice(0, matchLength)}</SearchHighlightDiv>
-      {item.name.slice(matchLength)}
+      <SearchHighlightDiv>
+        {item.name.slice(0, value.length)}
+      </SearchHighlightDiv>
+      {item.name.slice(value.length)}
     </Wrapper>
   );
 };

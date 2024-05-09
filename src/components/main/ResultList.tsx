@@ -1,25 +1,63 @@
 import Bookmark from "../../common/Image/Bookmark";
+import BookmarkBorder from "../../common/Image/BookmarkBorder";
 import { ResultListType } from "../../types/searchResult";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 interface ResultProps {
   searchResult: ResultListType;
+  toggleFavorites: (searchResult: ResultListType) => void;
 }
 
-const ResultList = (searchResults: ResultProps) => {
-  console.log(searchResults);
+const ResultList = ({ searchResult, toggleFavorites }: ResultProps) => {
+  const [isFavorites, setIsFavorites] = useState<boolean>(false);
+
+  useEffect(() => {
+    const favorites = localStorage.getItem("favorites");
+    if (favorites) {
+      const favoritesData = JSON.parse(favorites);
+
+      const isExist = favoritesData?.some(
+        (item: ResultListType) => item.id === searchResult.id
+      );
+      if (isExist) {
+        setIsFavorites(true);
+      } else {
+        setIsFavorites(false);
+      }
+    }
+  }, [searchResult.id]);
+
   return (
     <Wrapper>
       <Head>
-        <Title>피피디디벨럽먼트피티이엘티디</Title>
-        <Bookmark width="16" height="16" fill="#007BE9" />
+        <Title>{searchResult.lead_sponsor_name}</Title>
+
+        {isFavorites ? (
+          <Bookmark
+            onClick={() => {
+              setIsFavorites((pre) => !pre);
+              toggleFavorites(searchResult);
+            }}
+            width="16"
+            height="16"
+            cursor={"pointer"}
+          />
+        ) : (
+          <BookmarkBorder
+            //id 매개변수로 전달하기
+            onClick={() => {
+              setIsFavorites((pre) => !pre);
+              toggleFavorites(searchResult);
+            }}
+            width="16"
+            height="16"
+            fill="#007BE9"
+            cursor={"pointer"}
+          />
+        )}
       </Head>
-      <Contents>
-        이전에 전이성 췌관 선암종에 대한 치료를 받지 않은 시험대상자를 대상으로
-        SBP-101과 병용하거나 병용하지 않은 냅-파클리탁셀 및 젬시타빈에 대한
-        무작위배정, 이중눈가림, 위약 대조 임상시험
-      </Contents>
+      <Contents>{searchResult.title}</Contents>
       <Location>실시기관지역 | 경기도</Location>
       <Day>모집 마감일 | 2023년 5월 1일 까지</Day>
       <Conditions>

@@ -3,21 +3,19 @@ import React from "react";
 import SearchBar from "../components/main/SearchBar";
 import styled, { keyframes } from "styled-components";
 import { BANNER_TITLE } from "../constants/search";
-import useInput from "../hooks/useInput";
-import { useGetSearchResults } from "../remote/query/main";
 import NoResult from "../components/main/NoResult";
 import ResultList from "../components/main/ResultList";
 import { ResultListType } from "../types/searchResult";
 import Modal from "../common/Modal";
 import Overlay from "../common/Overlay";
 import useHandleModal from "../hooks/useHandleModal";
+import useSearchResult from "../hooks/useSearchResult";
 
 const Main = () => {
-  const { value, setValue, onChange } = useInput();
-
-  const { data: searchResults, refetch } = useGetSearchResults(value);
-
   const { isOpen, closeModal } = useHandleModal();
+
+  const { value, setValue, onChange, searchResults, refetch, toggleFavorites } =
+    useSearchResult();
 
   return (
     <Page>
@@ -36,7 +34,10 @@ const Main = () => {
         {searchResults?.results?.map(
           (result: ResultListType, index: number) => (
             <ResultItem key={result.id} index={index}>
-              <ResultList searchResult={result} />
+              <ResultList
+                toggleFavorites={toggleFavorites}
+                searchResult={result}
+              />
             </ResultItem>
           )
         )}
