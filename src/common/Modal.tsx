@@ -1,18 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { styled } from "styled-components";
 
-interface ModalProps {
+interface ModalProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   closeModal: () => void;
+  onClick: any;
 }
 
-const Modal = ({ children, closeModal }: ModalProps) => {
+const Modal = ({ onClick, children, closeModal, ...rest }: ModalProps) => {
   return (
     <Wrapper>
       <ModalTitle>{children}</ModalTitle>
       <div>
         <Closebutton onClick={closeModal}>취소</Closebutton>
-        <OpenButton onClick={closeModal}>확인</OpenButton>
+        <OpenButton onClick={onClick} {...rest}>
+          확인
+        </OpenButton>
       </div>
     </Wrapper>
   );

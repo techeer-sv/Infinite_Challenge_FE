@@ -6,14 +6,9 @@ import { BANNER_TITLE } from "../constants/search";
 import NoResult from "../components/main/NoResult";
 import ResultList from "../components/main/ResultList";
 import { ResultListType } from "../types/searchResult";
-import Modal from "../common/Modal";
-import Overlay from "../common/Overlay";
-import useHandleModal from "../hooks/useHandleModal";
 import useSearchResult from "../hooks/useSearchResult";
 
 const Main = () => {
-  const { isOpen, closeModal } = useHandleModal();
-
   const { value, setValue, onChange, searchResults, refetch, toggleFavorites } =
     useSearchResult();
 
@@ -35,18 +30,14 @@ const Main = () => {
           (result: ResultListType, index: number) => (
             <ResultItem key={result.id} index={index}>
               <ResultList
-                toggleFavorites={toggleFavorites}
+                location="main"
+                toggleFavorites={() => toggleFavorites(result)}
                 searchResult={result}
               />
             </ResultItem>
           )
         )}
       </ResultsContainer>
-      {isOpen && (
-        <Overlay>
-          <Modal closeModal={closeModal}>즐겨찾기에서 제거하시겠습니까?</Modal>
-        </Overlay>
-      )}
     </Page>
   );
 };
@@ -76,7 +67,7 @@ const BannerTitle = styled.h3`
   margin-bottom: 40px;
 `;
 
-const fadeIn = keyframes`
+export const fadeIn = keyframes`
   from {
     opacity: 0;
   }
@@ -85,7 +76,7 @@ const fadeIn = keyframes`
   }
 `;
 
-const ResultsContainer = styled.div`
+export const ResultsContainer = styled.div`
   max-width: 1000px;
   margin: 0 auto;
   display: flex;
@@ -99,7 +90,7 @@ const ResultsContainer = styled.div`
   padding: 20px 10px 20px 10px;
 `;
 
-const ResultItem = styled.div<{ index: number }>`
+export const ResultItem = styled.div<{ index: number }>`
   animation: ${fadeIn} 0.5s ease-in-out forwards;
   opacity: 0;
   margin-top: 20px;

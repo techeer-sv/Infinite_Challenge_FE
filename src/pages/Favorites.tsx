@@ -1,7 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { styled } from "styled-components";
+import { ResultItem, ResultsContainer } from "./Main";
+import { ResultListType } from "../types/searchResult";
+import ResultList from "../components/main/ResultList";
+import useHandleModal from "../hooks/useHandleModal";
+import Overlay from "../common/Overlay";
+import Modal from "../common/Modal";
 
 const Favorites = () => {
-  return <div>즐겨찾기 페이지</div>;
+  const [favoritesLists, setFavoritesLists] = useState<ResultListType[]>([]);
+  const { isOpen, closeModal, openModal } = useHandleModal();
+  const [clickedIndex, setClickedIndex] = useState<number>(0);
+  useEffect(() => {
+    const favorites = localStorage.getItem("favorites");
+    if (favorites) {
+      const favoritesData = JSON.parse(favorites);
+      setFavoritesLists(favoritesData);
+    }
+  }, []);
+
+  const deleteFavorites = (index: number): void => {
+    const newFavorites = favoritesLists.filter((_, index2) => index2 !== index);
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    setFavoritesLists(newFavorites);
+    closeModal();
+  };
+  return (
+    <Page>
+      <FavoritesLists>
+        {favoritesLists?.map((list: ResultListType, index: number) => {
+          return (
+            <ResultItem
+              onClick={() => console.log(index)}
+              key={list.id}
+              index={index}
+            >
+              <ResultList
+                location="favorites"
+                toggleFavorites={() => {
+                  setClickedIndex(index);
+                  openModal();
+                }}
+                searchResult={list}
+              />
+            </ResultItem>
+          );
+        })}
+      </FavoritesLists>
+      {isOpen && (
+        <Overlay>
+          <Modal
+            onClick={() => deleteFavorites(clickedIndex)}
+            closeModal={closeModal}
+          >
+            즐겨찾기에서 제거하시겠습니까?
+          </Modal>
+        </Overlay>
+      )}
+    </Page>
+  );
 };
 
 export default Favorites;
+
+const Page = styled.div``;
+
+const FavoritesLists = styled(ResultsContainer)``;

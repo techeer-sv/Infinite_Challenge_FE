@@ -6,10 +6,15 @@ import { styled } from "styled-components";
 
 interface ResultProps {
   searchResult: ResultListType;
-  toggleFavorites: (searchResult: ResultListType) => void;
+  toggleFavorites: (searchResult?: ResultListType) => void | (() => void);
+  location: "main" | "favorites";
 }
 
-const ResultList = ({ searchResult, toggleFavorites }: ResultProps) => {
+const ResultList = ({
+  location,
+  searchResult,
+  toggleFavorites,
+}: ResultProps) => {
   const [isFavorites, setIsFavorites] = useState<boolean>(false);
 
   useEffect(() => {
@@ -36,8 +41,14 @@ const ResultList = ({ searchResult, toggleFavorites }: ResultProps) => {
         {isFavorites ? (
           <Bookmark
             onClick={() => {
-              setIsFavorites((pre) => !pre);
-              toggleFavorites(searchResult);
+              if (location === "main") {
+                setIsFavorites((prev) => !prev);
+                toggleFavorites(searchResult);
+              }
+
+              if (location === "favorites") {
+                toggleFavorites();
+              }
             }}
             width="16"
             height="16"
@@ -47,8 +58,14 @@ const ResultList = ({ searchResult, toggleFavorites }: ResultProps) => {
           <BookmarkBorder
             //id 매개변수로 전달하기
             onClick={() => {
-              setIsFavorites((pre) => !pre);
-              toggleFavorites(searchResult);
+              if (location === "main") {
+                setIsFavorites((prev) => !prev);
+                toggleFavorites(searchResult);
+              }
+
+              if (location === "favorites") {
+                toggleFavorites();
+              }
             }}
             width="16"
             height="16"
