@@ -20,7 +20,11 @@ export default function Search() {
 
       <div className={cx("blue-container")}>
         <h1 className={cx("title")}>{"국내 모든 임상시험 검색하고\n온라인으로 참여하기"}</h1>
-        <SearchInput />
+        <SearchInput
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          setSearchResult={setSearchResult}
+        />
       </div>
 
       <div className={cx("result-container")}>

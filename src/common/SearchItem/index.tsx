@@ -37,7 +37,7 @@ export default function SearchItem({ item }: SearchItemProps) {
           </div>
 
           <div className={cx("mid-container")}>
-            <p className={cx("summary")}>{item.brief_summary}</p>
+            <p className={cx("summary")}>{item.title}</p>
           </div>
 
           <div className={cx("bottom-container")}>

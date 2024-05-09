@@ -1,16 +1,29 @@
-import { MouseEvent, useRef, useState } from "react";
+import { MouseEvent, useEffect, useRef, useState } from "react";
 import classNames from "classnames/bind";
 import style from "./index.module.scss";
 import smallSearch from "@/assets/images/smallSearch.svg";
 import search from "@/assets/images/search.svg";
 import Dropdown from "../Dropdown";
+import { SearchItemType } from "@/types/searchItemType";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const cx = classNames.bind(style);
 
-export default function SearchInput() {
+interface SearchInputProps {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  setSearchResult: React.Dispatch<React.SetStateAction<SearchItemType[]>>;
+}
+
+export default function SearchInput({
+  searchValue,
+  setSearchValue,
+  setSearchResult,
+}: SearchInputProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [isFocused, setIsFocused] = useState(false);
-  const [searchValue, setSearchValue] = useState<string>("");
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const focusInput = () => {
     inputRef.current?.focus();
@@ -20,6 +33,8 @@ export default function SearchInput() {
     e.stopPropagation();
 
     if (!searchValue) return;
+
+    setIsClicked(true);
     if (searchValue) {
       const recentSearches = JSON.parse(localStorage.getItem("recentSearches") || "[]");
       const updatedSearches = [
@@ -27,11 +42,29 @@ export default function SearchInput() {
         ...recentSearches.filter((item: string) => item !== searchValue),
       ];
       localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
-
-      setSearchValue("");
       setIsFocused(false);
     }
   };
+
+  const { data } = useQuery({
+    queryKey: ["searchResult", searchValue],
+    queryFn: async () => {
+      const encodedSearchValue = encodeURIComponent(searchValue);
+      const response = await axios.get(
+        `/api/v1/studies/?offset=0&limit=10&conditions=${encodedSearchValue}`
+      );
+
+      console.info("calling api");
+      return response.data;
+    },
+    enabled: isClicked === true && searchValue.length > 0,
+  });
+
+  useEffect(() => {
+    if (data) {
+      setSearchResult(data.results);
+    }
+  }, [data]);
 
   return (
     <div className={cx("search-container", { focused: isFocused })} onClick={focusInput}>
