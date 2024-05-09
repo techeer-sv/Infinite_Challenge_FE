@@ -35,7 +35,7 @@ export default function SearchInput() {
 
   return (
     <div className={cx("search-container", { focused: isFocused })} onClick={focusInput}>
-      {!isFocused && (
+      {!searchValue && !isFocused && (
         <div className={cx("icon-box")}>
           <img className={cx("small-icon")} src={smallSearch} alt="smallSearch" />
         </div>
