@@ -1,5 +1,4 @@
 import { IconProps } from "@/src/types/icon";
-import React from "react";
 
 const NoSearchIcon = ({ width, height, ...rest }: IconProps) => {
   return (
