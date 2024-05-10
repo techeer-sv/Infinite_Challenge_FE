@@ -10,7 +10,8 @@
 
 ### 피그마
 
-과제 요구 UI [피그마 링크]
+과제 요구 UI 
+[피그마](https://www.figma.com/design/2I7T132M48F6FbhJHwIB0r/Techeer-Infinite-Challenge-FE?node-id=0-1&t=jbsiLdOPrqVuuMqO-0)
 
 ### 기술스택
 
@@ -63,7 +64,27 @@
 
 - 검색창, 검색 결과 컴포넌트를 재사용 개발 기간 단축
 
+
+
 - Intersection observer를 활용해 무한스크롤 구현
 
 - 키보드만으로 추천 검색어들로 이동 가능하도록 구현
   - 검색창에서 onKeyDown 이벤트가 발생했을 때 event.key 값이 ArrowDown, ArrowUp일 경우 selectedIndex가 변경되게 했고 추천 검색어의 index와 selectedIndex가 같을 때 background-color가 변경되도록 구현.
+ 
+### 검색창
+![2024-05-1010 09 48-ezgif com-video-to-gif-converter](https://github.com/Leeseunghwan7305/Infinite_Challenge_FE/assets/78102507/378ec5b8-452d-4c64-8147-4f8a909deea7)
+
+### 검색 리스트 무한 스크롤
+
+![ezgif com-video-to-gif-converter](https://github.com/Leeseunghwan7305/Infinite_Challenge_FE/assets/78102507/a4e5f022-7ccc-41f7-b7ab-3aa66b7b98de)
+
+### 검색 리스트 즐겨찾기 스크랩 등록 및 삭제
+
+![ezgif com-video-to-gif-converter (1)](https://github.com/Leeseunghwan7305/Infinite_Challenge_FE/assets/78102507/1e74507b-1608-4f5f-9b9b-7fc9159fe29d)
+
+
+
+
+
+
+
