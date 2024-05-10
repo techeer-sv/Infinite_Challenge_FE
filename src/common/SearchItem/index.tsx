@@ -7,6 +7,7 @@ import { PageType } from "@/types/pageType";
 import bookmarkFill from "@/assets/images/bookmarkFill.svg";
 import { MouseEvent, useState } from "react";
 import Modal from "../Modal";
+import useModal from "@/hooks/useModal";
 
 const cx = classNames.bind(style);
 
@@ -23,20 +24,7 @@ export default function SearchItem({ searchItem, isPage }: SearchItemProps) {
   mapItem.push(searchItem.gender);
 
   const [bookmarks, setBookmarks] = useState<SearchItemType[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
-
-  const deleteBookmark = () => {
-    const currentBookmarks = JSON.parse(localStorage.getItem("bookmarksData") || "[]");
-    const newBookmarks = currentBookmarks.filter(
-      (bookmark: SearchItemType) => bookmark.id !== searchItem.id
-    );
-    localStorage.setItem("bookmarksData", JSON.stringify(newBookmarks));
-    setBookmarks([...newBookmarks]);
-    closeModal();
-  };
+  const { isOpen, openModal, closeModal, deleteBookmark } = useModal({ searchItem, setBookmarks });
 
   const handleBookmark = (searchResult: SearchItemType, e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
