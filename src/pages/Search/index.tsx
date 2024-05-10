@@ -31,7 +31,7 @@ export default function Search() {
         {searchValue.length > 0 ? (
           <SearchItemLayout>
             {searchResult.map((item) => (
-              <SearchItem key={item.id} item={item} />
+              <SearchItem key={item.id} searchItem={item} isPage="search" />
             ))}
           </SearchItemLayout>
         ) : (

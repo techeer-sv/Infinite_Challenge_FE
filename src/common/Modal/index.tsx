@@ -10,9 +10,11 @@ interface ModalProps {
 }
 
 export default function Modal({ isOpen, onCancel, onConfirm }: ModalProps) {
+  if (!isOpen) return null;
+
   return (
     <div className={cx("modal-overlay")}>
-      <dialog open={isOpen ? true : undefined} className={cx("modal-container")}>
+      <dialog open={isOpen} className={cx("modal-container")}>
         <label>즐겨찾기에서 제거하시겠습니까?</label>
         <menu className={cx("menu-container")}>
           <button className={cx(["button-container", "cancel-button"])} onClick={onCancel}>

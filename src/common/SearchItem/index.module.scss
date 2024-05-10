@@ -29,13 +29,19 @@
 }
 
 .clickable {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
 }
 
 .bookmark {
-  width: 1.3rem;
-  height: 1.65rem;
+  width: 2rem;
+  height: 2.4rem;
+
+  transition: scale 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .mid-container {
