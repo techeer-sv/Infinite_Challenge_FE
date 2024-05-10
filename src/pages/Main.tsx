@@ -122,5 +122,4 @@ export const ResultItem = styled.div<{ index: number }>`
 const Hidden = styled.div`
   display: hidden;
   height: 20px;
-  background-color: red;
 `;

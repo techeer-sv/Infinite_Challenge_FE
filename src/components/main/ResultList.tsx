@@ -17,6 +17,10 @@ const ResultList = ({
 }: ResultProps) => {
   const [isFavorites, setIsFavorites] = useState<boolean>(false);
 
+  const gotoLink = (id: number) => {
+    window.location.href = `https://clinicaltrialskorea.com/studies/${id}`;
+  };
+
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
@@ -34,13 +38,14 @@ const ResultList = ({
   }, [searchResult.id]);
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => gotoLink(searchResult.id)}>
       <Head>
         <Title>{searchResult.lead_sponsor_name}</Title>
 
         {isFavorites ? (
           <Bookmark
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+              e.stopPropagation();
               if (location === "main") {
                 setIsFavorites((prev) => !prev);
                 toggleFavorites(searchResult);
@@ -56,8 +61,8 @@ const ResultList = ({
           />
         ) : (
           <BookmarkBorder
-            //id 매개변수로 전달하기
-            onClick={() => {
+            onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+              e.stopPropagation();
               if (location === "main") {
                 setIsFavorites((prev) => !prev);
                 toggleFavorites(searchResult);
