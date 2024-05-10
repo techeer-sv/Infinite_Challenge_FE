@@ -80,11 +80,11 @@ const ResultList = ({
         )}
       </Head>
       <Contents>{searchResult.title}</Contents>
-      <Location>실시기관지역 | 경기도</Location>
-      <Day>모집 마감일 | 2023년 5월 1일 까지</Day>
+      <Location>실시기관지역 | {searchResult.locations[0]?.city}</Location>
+      <Day as="time">모집 마감일 | {searchResult.completion_date}</Day>
       <Conditions>
-        <div>2상</div>
-        <div>남녀모두</div>
+        <div>{searchResult.from_type}상</div>
+        <div>{searchResult.gender}</div>
       </Conditions>
     </Wrapper>
   );
@@ -134,7 +134,10 @@ const Location = styled.p`
   margin-bottom: 8px;
 `;
 
-const Day = styled(Location)``;
+const Day = styled(Location)`
+  display: inline-block;
+  margin-top: 10px;
+`;
 
 const Conditions = styled.div`
   display: flex;
