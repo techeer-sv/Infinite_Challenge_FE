@@ -39,9 +39,9 @@ export default function Dropdown({ searchValue }: DropdownProps) {
   }, [searchValue]);
 
   const { data } = useQuery({
-    queryKey: ["recommendedSearches", searchValue],
+    queryKey: ["recommendedSearches", debouncedSearchValue],
     queryFn: async () => {
-      const encodedSearchValue = encodeURIComponent(searchValue);
+      const encodedSearchValue = encodeURIComponent(debouncedSearchValue);
       const response = await axios.get(`/api/v1/search-conditions/?name=${encodedSearchValue}`);
 
       console.info("calling api");
