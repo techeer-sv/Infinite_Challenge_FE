@@ -28,10 +28,9 @@ const Wrapper = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-
-  width: 486px;
+  align-items: center;
+  width: 436px;
   height: 162px;
 
   top: calc(50% - 81px);
@@ -44,7 +43,6 @@ const Wrapper = styled.div`
 
   & > div {
     display: flex;
-    justify-content: space-between;
   }
 `;
 
@@ -58,15 +56,15 @@ const Closebutton = styled.button`
   width: 114px;
   height: 41px;
   padding: 10px 9px 10px 9px;
-  gap: 10px;
+  gap: 48px;
   border-radius: 10px;
   opacity: 0px;
   background: rgba(238, 240, 242, 1);
   color: black;
   border: none;
   cursor: pointer;
-  margin-right: 10px;
-
+  margin-right: 30px;
+  margin-left: 30px;
   &:hover {
     opacity: 0.8;
   }
