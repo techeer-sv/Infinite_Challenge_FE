@@ -64,7 +64,7 @@ export default function SearchInput({
     if (data) {
       setSearchResult(data.results);
     }
-  }, [data]);
+  }, [data, setSearchResult]);
 
   return (
     <div className={cx("search-container", { focused: isFocused })} onClick={focusInput}>
