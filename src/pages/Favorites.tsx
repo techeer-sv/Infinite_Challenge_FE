@@ -6,6 +6,11 @@ import ResultList from "../components/main/ResultList";
 import useHandleModal from "../hooks/useHandleModal";
 import Overlay from "../common/Overlay";
 import Modal from "../common/Modal";
+import NoResult from "../components/main/NoResult";
+import {
+  NO_FAVORITES_MESSAGE,
+  NO_FAVORITES_MESSAGE_DESCRIPTION,
+} from "../constants/search";
 
 const Favorites = () => {
   const [favoritesLists, setFavoritesLists] = useState<ResultListType[]>([]);
@@ -30,11 +35,7 @@ const Favorites = () => {
       <FavoritesLists>
         {favoritesLists?.map((list: ResultListType, index: number) => {
           return (
-            <ResultItem
-              onClick={() => console.log(index)}
-              key={list.id}
-              index={index}
-            >
+            <ResultItem key={list.id} index={index}>
               <ResultList
                 location="favorites"
                 toggleFavorites={() => {
@@ -47,6 +48,12 @@ const Favorites = () => {
           );
         })}
       </FavoritesLists>
+      {favoritesLists.length === 0 && (
+        <NoResult
+          title={NO_FAVORITES_MESSAGE}
+          description={NO_FAVORITES_MESSAGE_DESCRIPTION}
+        />
+      )}
       {isOpen && (
         <Overlay>
           <Modal

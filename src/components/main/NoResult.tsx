@@ -1,16 +1,17 @@
-import {
-  NO_RESULT_MESSAGE,
-  NO_RESULT_MESSAGE_DESCRIPTION,
-} from "../../constants/search";
 import NoSearchIcon from "../../common/Image/NoSearchIcon";
 import { styled } from "styled-components";
 
-const NoResult = () => {
+interface NoResultProps {
+  title: string;
+  description: string;
+}
+
+const NoResult = ({ title, description }: NoResultProps) => {
   return (
     <Wrapper>
       <NoSearchIcon width="72" height="72" />
-      <NoResultTitle>{NO_RESULT_MESSAGE}</NoResultTitle>
-      <NoResultDescription>{NO_RESULT_MESSAGE_DESCRIPTION}</NoResultDescription>
+      <NoResultTitle>{title}</NoResultTitle>
+      <NoResultDescription>{description}</NoResultDescription>
     </Wrapper>
   );
 };

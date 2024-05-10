@@ -1,16 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
 import SearchBar from "../components/main/SearchBar";
 import styled, { keyframes } from "styled-components";
-import { BANNER_TITLE } from "../constants/search";
+import {
+  BANNER_TITLE,
+  NO_RESULT_MESSAGE,
+  NO_RESULT_MESSAGE_DESCRIPTION,
+} from "../constants/search";
 import NoResult from "../components/main/NoResult";
+import useSearchResult from "../hooks/useSearchResult";
 import ResultList from "../components/main/ResultList";
 import { ResultListType } from "../types/searchResult";
-import useSearchResult from "../hooks/useSearchResult";
 
 const Main = () => {
-  const { value, setValue, onChange, searchResults, refetch, toggleFavorites } =
-    useSearchResult();
+  const {
+    value,
+    setValue,
+    onChange,
+    searchResults,
+    refetch,
+    toggleFavorites,
+    observerRef,
+    hasNextPage,
+    isFetching,
+  } = useSearchResult();
 
   return (
     <Page>
@@ -23,21 +35,28 @@ const Main = () => {
           onChange={onChange}
         />
       </SearchBanner>
-      {!searchResults?.count && <NoResult />}
-
+      {(!searchResults || searchResults?.pages[0].count === 0) && (
+        <NoResult
+          title={NO_RESULT_MESSAGE}
+          description={NO_RESULT_MESSAGE_DESCRIPTION}
+        />
+      )}
       <ResultsContainer>
-        {searchResults?.results?.map(
-          (result: ResultListType, index: number) => (
-            <ResultItem key={result.id} index={index}>
-              <ResultList
-                location="main"
-                toggleFavorites={() => toggleFavorites(result)}
-                searchResult={result}
-              />
-            </ResultItem>
-          )
-        )}
+        {searchResults?.pages.flatMap((page) => {
+          return page?.results.map((result: ResultListType, index: number) => {
+            return (
+              <ResultItem key={result.id} index={index}>
+                <ResultList
+                  location="main"
+                  toggleFavorites={() => toggleFavorites(result)}
+                  searchResult={result}
+                />
+              </ResultItem>
+            );
+          });
+        })}
       </ResultsContainer>
+      {hasNextPage && !isFetching && <Hidden ref={observerRef} />}
     </Page>
   );
 };
@@ -94,8 +113,14 @@ export const ResultItem = styled.div<{ index: number }>`
   animation: ${fadeIn} 0.5s ease-in-out forwards;
   opacity: 0;
   margin-top: 20px;
-
+  padding-bottom: 50px;
   &:nth-child(${(props) => props.index + 1}) {
     animation-delay: ${(props) => props.index * 0.5}s;
   }
+`;
+
+const Hidden = styled.div`
+  display: hidden;
+  height: 20px;
+  background-color: red;
 `;

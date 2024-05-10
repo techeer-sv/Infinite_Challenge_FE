@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSearchResults, getSearchLists } from "../../apis/main";
+import { getSearchLists } from "../../apis/main";
 import { QueryKeys } from "../../../queryClient";
 
 export const useGetSearchData = (name: string) => {
@@ -10,10 +10,10 @@ export const useGetSearchData = (name: string) => {
   });
 };
 
-export const useGetSearchResults = (name: string) => {
-  return useQuery({
-    queryKey: [QueryKeys.SEARCH_RESULTS, name],
-    queryFn: () => getSearchResults(name),
-    enabled: false,
-  });
-};
+// export const useGetSearchResults = (name: string) => {
+//   return useQuery({
+//     queryKey: [QueryKeys.SEARCH_RESULTS, name],
+//     queryFn: () => getSearchResults(name),
+//     enabled: false,
+//   });
+// };
