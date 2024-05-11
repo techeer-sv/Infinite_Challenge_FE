@@ -33,7 +33,6 @@ const InputBlock = styled.input`
   padding: 0 20px;
   border: none;
   border-radius: 50px 0 0 50px;
-  font-size: 1rem;
   outline: none;
   align-items: center;
   height: 100%;
@@ -43,8 +42,17 @@ const InputBlock = styled.input`
   background-size: 20px 20px; /* 아이콘 크기 조정 */
   padding-left: 48px; /* 아이콘과 텍스트 간 간격 조정 */
 
-  :focus {
-    border: none;
+  /* PC */
+  font-size: 1rem;
+
+  /* 태블릿 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 0.9rem;
+  }
+
+  /* 모바일 */
+  @media (max-width: 767px) {
+    font-size: 0.8rem;
   }
 `;
 
