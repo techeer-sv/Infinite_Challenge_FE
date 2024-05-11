@@ -32,8 +32,9 @@ export default {
       colors: {
         primary: "#007BE9",
         lightGray: "#EEF0F2",
+        silver: "#BBBBBB",
         gray: "#90959A",
-        blueGray: "506A89",
+        blueGray: "#506A89",
       },
     },
   },
@@ -42,6 +43,7 @@ export default {
       addBase({
         ":root": {
           "--color-primary": theme("colors.primary"),
+          "--color-silver": theme("colors.silver"),
         },
       });
     },
