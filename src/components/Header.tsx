@@ -39,44 +39,43 @@ const Container = styled.header`
   align-items: center;
   width: 100vw;
   max-width: 1024px;
-
-  /* PC용 */
   height: 60px;
+
+  /* PC */
   font-size: 1.2rem;
   padding: 0 45px;
 
-  /* 태블릿 기기용 (화면 너비가 768px 이상 1024px 미만) */
+  /* 태블릿 */
   @media (min-width: 768px) and (max-width: 1023px) {
-    height: 50px; /* 태블릿 높이 설정 */
     font-size: 1.1rem; /* 태블릿 폰트 크기 설정 */
     padding: 0 30px;
   }
 
-  /* 모바일 기기용 (화면 너비가 768px 미만) */
+  /* 모바일 */
   @media (max-width: 767px) {
-    height: 40px; /* 모바일 높이 설정 */
     font-size: 1rem; /* 모바일 폰트 크기 설정 */
     padding: 0 15px;
   }
 `;
 
 const imageDimension = {
+  // 원본 이미지 크기 138x25
   width: "138px",
   height: "25px",
 };
 
 const ImageBlock = styled.div`
-  /* PC용 */
+  /* PC */
   width: ${imageDimension.width};
   height: ${imageDimension.height};
 
-  /* 태블릿 기기용 (화면 너비가 768px 이상 1024px 미만) */
+  /* 태블릿 */
   @media (min-width: 768px) and (max-width: 1023px) {
     width: ${parseInt(imageDimension.width) * 0.9}px;
     height: ${parseInt(imageDimension.height) * 0.9}px;
   }
 
-  /* 모바일 기기용 (화면 너비가 768px 미만) */
+  /* 모바일 */
   @media (max-width: 767px) {
     width: ${parseInt(imageDimension.width) * 0.8}px;
     height: ${parseInt(imageDimension.height) * 0.8}px;
