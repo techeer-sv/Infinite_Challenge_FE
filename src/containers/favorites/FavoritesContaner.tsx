@@ -1,9 +1,19 @@
+import { styled } from "styled-components";
+
 const FavoritesContainer = () => {
   return (
-    <div>
+    <Container>
       <h1>Favorites</h1>
-    </div>
+    </Container>
   );
 };
 
 export default FavoritesContainer;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-size: 2rem;
+`;
