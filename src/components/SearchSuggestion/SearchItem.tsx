@@ -9,7 +9,7 @@ interface ISearchItem {
 const SearchItem = ({ boldText, regularText, onClick }: ISearchItem) => {
   return (
     <div
-      className="w-full flex items-center justify-between py-3 p-2 bg-lightGray hover:bg-lightGray cursor-pointer"
+      className="w-full flex items-center justify-between py-3 p-2 bg-white hover:bg-lightGray cursor-pointer"
       onClick={onClick}
     >
       <div className="flex items-center space-x-3">
