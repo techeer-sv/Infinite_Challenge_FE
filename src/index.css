@@ -1,23 +1,43 @@
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Spoqa Han Sans Neo 폰트 적용 */
+  font-family: "Spoqa Han Sans Neo", sans-serif;
+  /* TODO: line-height가 모두 다르므로 Component화 시켜 관리 */
+  /* TODO: font-weight 커스텀화하기 */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* 라이트 모드 고정 */
+  color-scheme: light;
+  /* 기본 텍스트 색상 설정 */
+  color: #000000;
+  /* 기본 배경 색상 설정 */
+  background-color: #ffffff;
 
+  /* 폰트 관련 설정들 */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* 테두리가 외부로 나가 레이아웃을 해치는 것 방지 */
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* TODO: a tag 스타일 설정 */
 a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
+/* TODO: a tag hover 스타일 설정 */
 a:hover {
   color: #535bf2;
 }
@@ -25,16 +45,27 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  justify-content: center;
+  /* 반응형 최소치 고정 */
   min-width: 320px;
+  max-width: 100vw;
   min-height: 100vh;
 }
 
+/* min-width 320px 아래로 내려가지 않도록 설정 */
+@media (max-width: 320px) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* TODO: h1 tag 스타일 설정 */
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
+/* TODO: button tag 전체 커스텀 후 하단 코드라인 제거 */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -54,15 +85,4 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+/* TODO: 스크롤 숨기기 */
