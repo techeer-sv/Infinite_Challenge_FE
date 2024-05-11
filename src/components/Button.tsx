@@ -1,12 +1,20 @@
 type ButtonVariant = "primary" | "dismiss";
-
+type ButtonType = "button" | "submit";
 interface IButton {
+  type?: ButtonType;
+  customStyle?: string;
   variant?: ButtonVariant;
-  children: string;
+  children: string | React.ReactNode;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button = ({ variant, children, onClick }: IButton) => {
+const Button = ({
+  type = "button",
+  variant,
+  children,
+  onClick,
+  customStyle,
+}: IButton) => {
   const baseStyle = "text-sm px-8 py-3 rounded-md";
 
   const styles = {
@@ -17,7 +25,11 @@ const Button = ({ variant, children, onClick }: IButton) => {
   const buttonStyle = (variant && styles[variant]) || "";
 
   return (
-    <button onClick={onClick} className={`${baseStyle} ${buttonStyle}`}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${customStyle ? customStyle : baseStyle} ${buttonStyle}`}
+    >
       {children}
     </button>
   );

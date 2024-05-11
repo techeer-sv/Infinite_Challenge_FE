@@ -23,6 +23,15 @@ const meta = {
       options: ["primary", "dismiss"],
       description: "버튼 스타일",
     },
+    type: {
+      control: "radio",
+      options: ["button", "submit"],
+      description: "버튼 타입",
+    },
+    customStyle: {
+      control: "text",
+      description: "버튼 커스텀 스타일",
+    },
   },
   args: {
     onClick: fn(),

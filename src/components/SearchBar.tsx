@@ -1,6 +1,6 @@
 import SearchIcon from "@/components/icons/SearchIcon";
 import { useState } from "react";
-
+import Button from "@/components/Button";
 // Controlled 컴포넌트
 interface ISearchBar {
   value: string;
@@ -43,12 +43,13 @@ const SearchBar = ({ value, placeholder, onSubmit, onChange }: ISearchBar) => {
           onBlur={handleBlur}
         />
       </div>
-      <button
+      <Button
         type="submit"
-        className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full ml-2"
+        customStyle="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-full ml-2"
+        onClick={() => {}}
       >
         <SearchIcon size={21} color="white" />
-      </button>
+      </Button>
     </form>
   );
 };

@@ -29,13 +29,6 @@ const Modal = ({ title, onConfirm, onClose, isOpen }: IModal) => {
           <Button variant="primary" onClick={onConfirm}>
             확인
           </Button>
-
-          {/* <button
-            className="bg-primary text-sm text-white px-8 py-3 rounded-md"
-            onClick={onConfirm}
-          >
-            확인
-          </button> */}
         </div>
       </div>
     </div>
