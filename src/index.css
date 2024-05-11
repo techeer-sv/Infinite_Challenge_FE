@@ -31,11 +31,10 @@ html {
   box-sizing: inherit;
 }
 
-/* TODO: a tag 스타일 설정 */
+/* TODO: a tag 스타일 초기화 */
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  text-decoration: none;
+  color: #000000;
 }
 /* TODO: a tag hover 스타일 설정 */
 a:hover {
