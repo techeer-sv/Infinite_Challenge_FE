@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-
+import Button from "@/components/Button";
 interface IModal {
   title: string;
   onConfirm: () => void;
@@ -22,18 +22,20 @@ const Modal = ({ title, onConfirm, onClose, isOpen }: IModal) => {
         <p className="text-center text-base">{title}</p>
 
         <div className="flex justify-around mt-10">
-          <button
-            className="bg-lightGray text-sm  px-8 py-3 rounded-md"
-            onClick={onClose}
-          >
+          <Button variant="dismiss" onClick={onClose}>
             취소
-          </button>
-          <button
+          </Button>
+
+          <Button variant="primary" onClick={onConfirm}>
+            확인
+          </Button>
+
+          {/* <button
             className="bg-primary text-sm text-white px-8 py-3 rounded-md"
             onClick={onConfirm}
           >
             확인
-          </button>
+          </button> */}
         </div>
       </div>
     </div>
