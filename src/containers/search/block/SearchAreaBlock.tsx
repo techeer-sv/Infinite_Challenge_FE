@@ -3,7 +3,12 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import SearchBar from "../view/SearchBar";
 
-const SearchAreaBlock = () => {
+const SearchAreaBlock = ({
+  onSearchSubmit,
+  onSearchChange,
+  searchQuery,
+}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any) => {
   const [isFocused, setFocused] = useState(false);
 
   return (
@@ -15,7 +20,11 @@ const SearchAreaBlock = () => {
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
         focused={isFocused}>
-        <SearchBar />
+        <SearchBar
+          onSearchSubmit={onSearchSubmit}
+          onSearchChange={onSearchChange}
+          searchQuery={searchQuery}
+        />
       </SearchBlock>
     </Container>
   );

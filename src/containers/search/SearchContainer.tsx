@@ -2,8 +2,11 @@ import { styled } from "styled-components";
 import SearchAreaBlock from "./block/SearchAreaBlock";
 import ResultCard from "./view/ResultCard";
 import useSearchResults from "../../apiAgents/hooks/useSearchResults";
+import { useState } from "react";
 
 const SearchContainer = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [finalSearchQuery, setFinalSearchQuery] = useState("");
   // 이벤트 기반 데이터 패칭 방식으로 데이터를 가져옵니다.
   const {
     searchData,
@@ -11,12 +14,20 @@ const SearchContainer = () => {
     error,
   }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
   { searchData: any[]; loading: boolean; error: null } =
-    useSearchResults("갑상선암");
+    useSearchResults(finalSearchQuery);
+
+  const handleSearchSubmit = (query: string) => {
+    setFinalSearchQuery(query);
+  };
 
   return (
     <Container>
       <SearchArea>
-        <SearchAreaBlock />
+        <SearchAreaBlock
+          onSearchSubmit={handleSearchSubmit}
+          onSearchChange={setSearchQuery}
+          searchQuery={searchQuery}
+        />
       </SearchArea>
       <ResultArea>
         {loading && <p>Loading...</p>}
@@ -42,6 +53,7 @@ export default SearchContainer;
 
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100vw;
   flex-direction: column;
   justify-content: start;
@@ -49,6 +61,7 @@ const Container = styled.div`
   font-size: 2rem;
   min-height: calc(100vh - 60px);
   gap: 2vh;
+  margin-bottom: 40px;
 `;
 
 const SearchArea = styled.div`
@@ -59,10 +72,9 @@ const SearchArea = styled.div`
 `;
 
 const ResultArea = styled.div`
-  width: 100vw;
-  max-width: 1024px;
+  width: 100%;
+  max-width: 960px;
   justify-content: center;
-  /* 2*n줄의 그리드 생성 */
   display: grid;
 
   /* PC */

@@ -2,11 +2,31 @@ import { styled } from "styled-components";
 import searchIcon from "@/assets/icons/search.svg";
 import placeHolderSearchIcon from "@/assets/icons/search_placeholder.svg";
 
-export const SearchBar = () => {
+export const SearchBar = ({
+  onSearchSubmit,
+  onSearchChange,
+  searchQuery,
+}: // eslint-disable-next-line @typescript-eslint/no-explicit-any
+any) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSearchChange = (e: any) => {
+    onSearchChange(e.target.value);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    onSearchSubmit(searchQuery);
+  };
+
   return (
-    <Container>
-      <InputBlock type='text' placeholder={`질환명을 입력해주세요`} />
-      <SearchButton>
+    <Container as='form' onSubmit={handleSubmit}>
+      <InputBlock
+        type='text'
+        placeholder={`질환명을 입력해주세요`}
+        onChange={handleSearchChange}
+      />
+      <SearchButton type='submit'>
         <img src={searchIcon} alt='search' />
       </SearchButton>
     </Container>
