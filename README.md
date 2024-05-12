@@ -2,6 +2,11 @@
 
 - [제작 문서(Notion)](https://time-map.notion.site/Techeer-5ecace250f2344e9a1e2a5cde3c64ffa?pvs=4)
 
+## 5/12 11시 검색 기능 구현 시작
+
+- [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
+  - 검색어 추천 API 연결
+
 ## 5/12 10시 검색 기능 구현 시작
 
 - [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
