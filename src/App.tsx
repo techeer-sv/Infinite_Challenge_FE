@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SearchContainer from "./containers/search/SearchContainer";
 import FavoritesContainer from "./containers/favorites/FavoritesContaner";
-import Header from "./components/Header";
 import { styled } from "styled-components";
+import Header from "./components/layout/Header";
 
 function App() {
   return (
