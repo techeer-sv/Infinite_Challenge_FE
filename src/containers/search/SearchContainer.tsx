@@ -3,6 +3,7 @@ import SearchAreaBlock from "./block/SearchAreaBlock";
 import ResultCard from "./view/ResultCard";
 import useSearchResults from "../../apiAgents/hooks/useSearchResults";
 import { useState } from "react";
+import notFoundImage from "@/assets/images/404_Icon.png";
 
 const SearchContainer = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -29,12 +30,23 @@ const SearchContainer = () => {
           searchQuery={searchQuery}
         />
       </SearchArea>
-      <ResultArea>
+      <NotFoundBlock>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {(error as Error).message}</p>}
         {!loading && !error && searchData.length === 0 && (
-          <p>No results found.</p>
+          <>
+            <img src={notFoundImage} alt='검색 결과 없음' />
+            현재 모집 중인 임상시험이 없습니다.
+            <p>
+              원하시는 결과를 찾지 못하셨나요? <br />
+              아래 '임상시험 소식받기'를 통해 간단한 정보만 입력해주시면 해당
+              조건에 맞는 새로운 임상시험이 등록되었을 때 빠르게
+              알려드리겠습니다.
+            </p>
+          </>
         )}
+      </NotFoundBlock>
+      <ResultArea>
         {!loading &&
           !error &&
           searchData.length > 0 &&
@@ -60,7 +72,6 @@ const Container = styled.div`
   align-items: center;
   font-size: 2rem;
   min-height: calc(100vh - 60px);
-  gap: 2vh;
   margin-bottom: 40px;
 `;
 
@@ -90,5 +101,27 @@ const ResultArea = styled.div`
   @media (max-width: 767px) {
     padding: 0 20px;
     grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+const NotFoundBlock = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  gap: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1e2025;
+  letter-spacing: -0.4px;
+  line-height: 24px;
+
+  p {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #6a737b;
   }
 `;

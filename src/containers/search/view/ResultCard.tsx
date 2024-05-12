@@ -48,7 +48,15 @@ const ResultCard = ({ data }: { data: SearchDataType }) => {
       </AdditionalInfo>
 
       {/* 상세 정보 */}
-      <Summary>{data.brief_summary || "No summary available"}</Summary>
+      {/* 이렇게 하면 좋은 방법은 아니지만 구현 우선으로 처리 */}
+      <Summary>
+        {(data.brief_summary &&
+          (data.brief_summary.length > 400
+            ? `${data.brief_summary.substring(0, 400)}...`
+            : data.brief_summary)) ||
+          "No summary available"}
+      </Summary>
+      {/* 동일한 내용이지만 숨겨두기만 하면 어떨까? */}
     </Container>
   );
 };
@@ -127,7 +135,7 @@ const ResultTag = styled.div`
 `;
 
 const Summary = styled.div`
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: white;
   color: black;
   padding: 20px; // Container와 동일한 padding
   position: absolute;
@@ -142,7 +150,7 @@ const Summary = styled.div`
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-  z-index: 2;
+  z-index: 20;
   border-radius: 10px; // Container와 동일한 border-radius
   display: flex;
   flex-direction: column;

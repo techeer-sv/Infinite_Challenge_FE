@@ -1,5 +1,4 @@
 // SearchAreaBlock.js
-import { useState } from "react";
 import { styled } from "styled-components";
 import SearchBar from "../view/SearchBar";
 
@@ -9,17 +8,12 @@ const SearchAreaBlock = ({
   searchQuery,
 }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
 any) => {
-  const [isFocused, setFocused] = useState(false);
-
   return (
     <Container>
       <Description>
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기
       </Description>
-      <SearchBlock
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
-        focused={isFocused}>
+      <SearchBlock>
         <SearchBar
           onSearchSubmit={onSearchSubmit}
           onSearchChange={onSearchChange}
@@ -83,17 +77,11 @@ const Description = styled.p`
     line-height: 36px;
   }
 `;
-
-interface SearchBlockProps {
-  focused: boolean;
-}
-
-const SearchBlock = styled.div<SearchBlockProps>`
+const SearchBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  border: ${({ focused }) => (focused ? "2px solid #007be9" : "none")};
   /* 좌우만 둥글게 */
   border-radius: 50px;
   /* TODO: 선택 시 좌우로 늘어나는 애니메이션 적용 고려하기 */
