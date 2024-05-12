@@ -1,7 +1,7 @@
 // SearchAreaBlock.js
 import { useState } from "react";
 import { styled } from "styled-components";
-import SearchBar from "./SearchBar";
+import SearchBar from "../view/SearchBar";
 
 const SearchAreaBlock = () => {
   const [isFocused, setFocused] = useState(false);
