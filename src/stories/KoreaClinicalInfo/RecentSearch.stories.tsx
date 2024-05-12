@@ -36,7 +36,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Exist: Story = {
   args: {
-    recentKeyWords: ["갑상선암", "갑상선염"],
+    recentKeyWords: [
+      {
+        name: "갑상선암",
+        id: 4373,
+      },
+      {
+        name: "갑상선염",
+        id: 4376,
+      },
+    ],
   },
 };
 

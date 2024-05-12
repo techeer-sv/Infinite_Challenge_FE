@@ -41,7 +41,16 @@ type Story = StoryObj<typeof meta>;
 export const Exist: Story = {
   args: {
     searchKeywords: "갑상",
-    recommendKeyWords: ["갑상선암", "갑상선염"],
+    recommendKeyWords: [
+      {
+        name: "갑상선암",
+        id: 4373,
+      },
+      {
+        name: "갑상선염",
+        id: 4376,
+      },
+    ],
   },
 };
 

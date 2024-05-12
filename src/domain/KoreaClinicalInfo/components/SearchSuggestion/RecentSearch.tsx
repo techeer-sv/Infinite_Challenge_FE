@@ -1,8 +1,8 @@
 import { SearchItem } from ".";
-
+import { SearchKeywordType } from "../../types";
 interface IRecentSearch {
-  onItemClick: (keyword: string) => void;
-  recentKeyWords: string[];
+  onItemClick: (keyword: number) => void;
+  recentKeyWords: SearchKeywordType[];
 }
 
 const RecentSearch = ({ recentKeyWords, onItemClick }: IRecentSearch) => {
@@ -17,8 +17,8 @@ const RecentSearch = ({ recentKeyWords, onItemClick }: IRecentSearch) => {
           {recentKeyWords.map((keyword, index) => (
             <SearchItem
               key={index}
-              regularText={keyword}
-              onClick={() => onItemClick(keyword)}
+              regularText={keyword.name}
+              onClick={() => onItemClick(keyword.id)}
             />
           ))}
         </>

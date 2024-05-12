@@ -1,10 +1,10 @@
 import SearchIcon from "@/components/icons/SearchIcon";
 import { SearchItem } from ".";
-
+import { SearchKeywordType } from "../../types";
 interface IRecommendSearch {
   searchKeywords: string;
-  onItemClick: (keyword: string) => void;
-  recommendKeyWords: string[];
+  onItemClick: (keywordId: number) => void;
+  recommendKeyWords: SearchKeywordType[];
 }
 /**
  * 특정 검색 키워드를 기준으로 추천 키워드를 분리하는 함수
@@ -47,13 +47,13 @@ const RecommendSearch = ({
       {recommendKeyWords && recommendKeyWords.length > 0 ? (
         <>
           {recommendKeyWords.map((keyword, index) => {
-            const regularText = splitKeyword(searchKeywords, keyword);
+            const regularText = splitKeyword(searchKeywords, keyword.name);
             return (
               <SearchItem
                 key={index}
                 boldText={searchKeywords}
                 regularText={regularText}
-                onClick={() => onItemClick(keyword)}
+                onClick={() => onItemClick(keyword.id)}
               />
             );
           })}
