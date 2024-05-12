@@ -2,7 +2,13 @@
 
 - [제작 문서(Notion)](https://time-map.notion.site/Techeer-5ecace250f2344e9a1e2a5cde3c64ffa?pvs=4)
 
-## 5/12 11시 검색 추천 API 연결
+## 5/12 13시 즐겨찾기 기능구현 시작
+
+- [구현(feature) - Search](https://time-map.notion.site/feature-Search-e40e36aaded34919b68882095e69d3cf?pvs=4)
+  - 즐겨찾기 기능구현
+  - 즐겨찾기 UI 제작 및 연결 완료(Jotai)
+
+## 5/12 11시 검색 추천 API 연결 시작
 
 - [구현(feature) - Search](https://time-map.notion.site/feature-Search-e40e36aaded34919b68882095e69d3cf?pvs=4)
   - 검색어 추천 API 연결
