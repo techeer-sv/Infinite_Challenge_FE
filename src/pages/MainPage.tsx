@@ -29,6 +29,9 @@ const TextWrapper = styled.div`
 
 const ResultContainer = styled.div`
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 // const SearchBar = styled.div`

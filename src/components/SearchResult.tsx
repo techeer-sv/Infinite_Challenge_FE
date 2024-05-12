@@ -1,10 +1,19 @@
+import styled from "styled-components"
+
+const Container = styled.div`
+  width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+`
+
 export const SearchResult = ({datas}:{datas: any[]}) =>{
   return(
-    <div>
+    <Container>
       {datas.map((data,index)=>(
-        <div key={index}>{data.id}</div>
+        <div key={index}>{data.title}</div>
       ))}
       {/* //TODO: 컴포넌트 만들어서 뺴기 */}
-    </div>
+    </Container>
   )
 }

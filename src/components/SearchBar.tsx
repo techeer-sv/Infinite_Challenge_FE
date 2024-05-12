@@ -14,6 +14,7 @@ const SearchBarContainer = styled.div`
   border-radius: 42px;
   margin-top: 40px;
   position: relative;
+
   border: ${({ isFocused }) => isFocused ? "1px solid #007BE9" : "none"};
 `;
 
@@ -24,7 +25,6 @@ const TestInput = styled.input`
   outline: none;
   font-size: 16px;
   border-radius: 42px;
-
   text-align: center;
   :focus {
     border: none;
@@ -32,7 +32,7 @@ const TestInput = styled.input`
   }
 `;
 
-export const SearchBar = ({handleSearch}:any) => {
+export const SearchBar = ({ handleSearch }: any) => {
   const [isFocus, setIsFocus] = useState(false);
   const [input, setInput] = useState<string>('');
   const [data, setData] = useState<string[]>([]);
@@ -41,9 +41,6 @@ export const SearchBar = ({handleSearch}:any) => {
 
   const handleFocus = () => {
     setIsFocus(true);
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
   };
 
   const handleBlur = () => {
@@ -52,7 +49,7 @@ export const SearchBar = ({handleSearch}:any) => {
 
   const handleInput = (e) => {
     setInput(e.target.value)
-  }
+  };
 
   useEffect(() => {
     if (input.trim() !== "") {
@@ -68,23 +65,27 @@ export const SearchBar = ({handleSearch}:any) => {
         }
       };
       fetchData();
+    }else{
+      setData([])
     }
   }, [input]);
   
 
 
   return (
-    <Container
-      tabIndex={0}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-    >
-      <SearchBarContainer onFocused={isFocus}>
-        {/* {isFocus ? <div>이미지</div> : null} */}
-        <TestInput value={input} placeholder="질환명을 입력해주세요"  onChange={(e)=>handleInput(e)} ref={inputRef} />
-        <button onClick={()=>handleSearch(input)}>버튼</button>
+    <Container>
+      <SearchBarContainer>
+        <TestInput
+          value={input}
+          placeholder="질환명을 입력해주세요"
+          onChange={handleInput}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={inputRef}
+        />    
+        <button  onClick={() => handleSearch(input)}>검색</button>
+        <DropDowns datas={data} handleSearch={handleSearch} />
       </SearchBarContainer>
-      {isFocus ? <DropDowns datas={data} /> : null}
     </Container>
   );
 };
