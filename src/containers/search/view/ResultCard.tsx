@@ -1,7 +1,21 @@
 import { styled } from "styled-components";
 import { LocationDataType, SearchDataType } from "../../../types";
+import { useAtom } from "jotai";
+import { favoriteResultsAtom } from "../../../store/favorites";
 
 const ResultCard = ({ data }: { data: SearchDataType }) => {
+  const [favorites, setFavorites] = useAtom(favoriteResultsAtom);
+  const isFavorite = favorites.has(data.ct_id);
+  const toggleFavorite = () => {
+    const newFavorites = new Map(favorites);
+    if (newFavorites.has(data.ct_id)) {
+      newFavorites.delete(data.ct_id);
+    } else {
+      newFavorites.set(data.ct_id, data);
+    }
+    setFavorites(newFavorites);
+  };
+
   if (!data) {
     return <div>No data available.</div>;
   }
@@ -18,50 +32,76 @@ const ResultCard = ({ data }: { data: SearchDataType }) => {
   };
 
   return (
-    <Container onClick={redirectToUrl}>
+    <Container>
+      <ClickArea onClick={redirectToUrl} />
       <TitleArea>
-        {/* 가장 상단 스폰서, 약간 흐린 글씨 */}
-        <SponsorText>{data.lead_sponsor_name}</SponsorText>
-        {/* 메인 정보로 보이는 제목 */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}>
+          <SponsorText>{data.lead_sponsor_name}</SponsorText>
+          <FavoriteIcon
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavorite();
+            }}
+            isFavorite={isFavorite}
+          />
+        </div>
         <MainTitle>{data.title}</MainTitle>
       </TitleArea>
       <AdditionalInfo>
-        {/* 지역 정보 */}
-        <LocationInfo>
-          실시기관지역 | {locationDisplay ? locationDisplay : "알 수 없음"}
-        </LocationInfo>
-        {/* 모집일|2023년5월~~~ 2024년 ~~~ */}
+        <LocationInfo>실시기관지역 | {locationDisplay}</LocationInfo>
         <CompletionDate>
           모집일 | {data.start_date} ~ {data.completion_date}
         </CompletionDate>
-        {/* 나이 제한 */}
         <AvailableAge>
           나이제한 | {data.minimum_age_display} ~{" "}
           {data.maximum_age_display || "제한없음"}
         </AvailableAge>
-
-        {/* 나머지 정보, 태그 형식으로 관리 */}
         <TagArea>
           <ResultTag>{data.phases}</ResultTag>
           <ResultTag>{data.gender}</ResultTag>
         </TagArea>
       </AdditionalInfo>
-
-      {/* 상세 정보 */}
-      {/* 이렇게 하면 좋은 방법은 아니지만 구현 우선으로 처리 */}
       <Summary>
         {(data.brief_summary &&
-          (data.brief_summary.length > 400
-            ? `${data.brief_summary.substring(0, 400)}...`
+          (data.brief_summary.length > 300
+            ? data.brief_summary.slice(0, 300) + "..."
             : data.brief_summary)) ||
           "No summary available"}
       </Summary>
-      {/* 동일한 내용이지만 숨겨두기만 하면 어떨까? */}
     </Container>
   );
 };
 
 export default ResultCard;
+
+interface FavoriteIconProps {
+  isFavorite: boolean;
+}
+
+const FavoriteIcon = styled.div<FavoriteIconProps>`
+  cursor: pointer;
+  width: 14px;
+  height: 22px;
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  background-color: ${(props) => (props.isFavorite ? "#007BE9" : "#ccc")};
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: #ffd700;
+  }
+`;
+
+const ClickArea = styled.div`
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
 
 const TitleArea = styled.div`
   display: flex;
@@ -135,11 +175,10 @@ const ResultTag = styled.div`
 `;
 
 const Summary = styled.div`
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.9);
   color: black;
   padding: 20px; // Container와 동일한 padding
   position: absolute;
-  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -155,6 +194,19 @@ const Summary = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+
+  /* PC */
+  top: 48px;
+
+  /* 태블릿 */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    top: 40px;
+  }
+
+  /* 모바일 */
+  @media (max-width: 767px) {
+    top: 30px;
+  }
 `;
 
 const Container = styled.div`
