@@ -91,7 +91,6 @@ const Input = styled.input`
   border: none;
   font-size: 16px;
   background-color: transparent;
-  pointer-events: none;
   input::placeholder {
     color: #bbbbbb;
   }
