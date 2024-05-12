@@ -51,9 +51,8 @@ export const MainPage = () =>{
     const fetchDatas =async () => {
       try {
         const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
-        console.log(response)
+        console.info("calling api")
         setSearchData(response.data.results)
-        console.log(response.data.results)
       } catch (error) {
         console.log(error)
       }

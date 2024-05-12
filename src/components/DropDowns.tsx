@@ -34,9 +34,6 @@ const DropDownItem = styled.div`
 export const DropDowns = ({datas,handleSearch}:{datas: any[],handleSearch: (name:string)=>void}) =>{
   const [ focusIndex, setFocusIndex ] = useState<number>(0)
 
-  useEffect(()=>{
-    console.log(focusIndex)
-  },[focusIndex])
 
   const handleKeyPress = (event) =>{
     event.preventDefault()
@@ -52,10 +49,14 @@ export const DropDowns = ({datas,handleSearch}:{datas: any[],handleSearch: (name
 
   return(
     <Container>
+      {/* //TODO: 검색어 없음 구현하기 */}
+
       {datas.map((data,index)=>(
         <DropDownItem tabIndex={0} focused={index===focusIndex} onClick={()=>handleSearch(data.name)} onKeyDown={handleKeyPress} onFocus={()=>setFocusIndex(index)}  key={index}>{data.name}</DropDownItem>
       ))}
       {/* //TODO: 컴포넌트 만들어서 뺴기 */}
+      {/* //TODO: 최근 검색어 구현하기 */}
+
     </Container>
   )
 }
