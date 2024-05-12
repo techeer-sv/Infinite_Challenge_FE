@@ -20,6 +20,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body,
+html {
+  /* 스크롤바 숨기기 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 /* 테두리가 외부로 나가 레이아웃을 해치는 것 방지 */
 html {
   box-sizing: border-box;
