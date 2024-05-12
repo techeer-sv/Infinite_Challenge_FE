@@ -72,7 +72,7 @@ export const MainPage = () =>{
         <SearchBar handleSearch={handleSearchButton}/>
       </SearchContainer>
       <ResultContainer>
-        {searchData.length === 0 ? "true":<SearchResult datas={searchData} /> }
+        {searchData.length === 0 ? "검색어 없음" : <SearchResult datas={searchData} /> }
       </ResultContainer>
     </Container>
   )
