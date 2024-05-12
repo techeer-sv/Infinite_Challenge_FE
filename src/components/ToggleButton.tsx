@@ -12,7 +12,7 @@ const ToggleButton = ({ checked, onClick }: IToggleButton) => {
       aria-pressed={checked}
       className="p-2 bg-white border-none cursor-pointer focus:outline-none"
     >
-      <BookmarkIcon fillColor={checked ? "color-primary" : "none"} />
+      <BookmarkIcon fillColor="color-primary" isFilled={checked} />
     </button>
   );
 };
