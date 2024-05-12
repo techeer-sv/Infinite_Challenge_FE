@@ -50,8 +50,8 @@ export const MainPage = () =>{
     const encodedInput = encodeURIComponent(input);
     const fetchDatas =async () => {
       try {
-        const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
         console.info("calling api")
+        const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
         setSearchData(response.data.results)
       } catch (error) {
         console.log(error)
@@ -65,13 +65,13 @@ export const MainPage = () =>{
     <Container>
       <SearchContainer>
         <TextWrapper>
-          국내 모든 임상시험 검색하고<br/>  
+          국내 모든 임상시험 검색하고<br/>
           온라인으로 참여하기
         </TextWrapper>
         <SearchBar handleSearch={handleSearchButton}/>
       </SearchContainer>
       <ResultContainer>
-        {searchData.length === 0 ? "검색어 없음" : <SearchResult datas={searchData} /> }
+        {searchData.length === 0 ? "검색 결과 없음" : <SearchResult datas={searchData} /> }
       </ResultContainer>
     </Container>
   )

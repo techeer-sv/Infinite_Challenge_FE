@@ -58,8 +58,8 @@ export const SearchBar = ({ handleSearch }: any) => {
       const fetchData = async () => {
         try {
           const response = await axios.get(`/api/v1/search-conditions/?name=${encodedInput}`);
-          console.log(response)
           setData(response.data);
+          console.info("calling api")
         } catch (error) {
           console.error(error);
         }
@@ -82,8 +82,8 @@ export const SearchBar = ({ handleSearch }: any) => {
           onFocus={handleFocus}
           onBlur={handleBlur}
           ref={inputRef}
-        />    
-        <button  onClick={() => handleSearch(input)}>검색</button>
+        /> 
+        <button  onClick={() => handleSearch(input)}>검색 결과</button>
         <DropDowns datas={data} handleSearch={handleSearch} />
       </SearchBarContainer>
     </Container>
