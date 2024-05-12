@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-// const PROXY_URL = "https://cors-anywhere.herokuapp.com/";
 const API_URL = "/api/v1/studies/?offset=0&limit=10&conditions=";
 
 function useSearchResults(searchQuery: string) {
