@@ -2,10 +2,17 @@
 
 - [제작 문서(Notion)](https://time-map.notion.site/Techeer-5ecace250f2344e9a1e2a5cde3c64ffa?pvs=4)
 
+## 5/12 10시 검색 기능 구현 시작
+
+- [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
+  - 검색 시 결과 리스트가 정상적으로 돌아오도록 하기
+
 ## 5/11 16시 결과 영역 구현 시작
 
 - [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
   - Result 영역 구현
+  - Result 카드에 결과 들어오도록 설정
+  - hover 시 description 표현되도록 설정
 
 ## 5/11 16시 검색바 구현 시작
 
