@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import SearchBar from "@/components/SearchBar";
+import SearchBar from "@/domain/KoreaClinicalInfo/components/SearchBar";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Components/SearchBar",
+  title: "KoreaClinicalInfo/SearchBar",
   component: SearchBar,
   parameters: {
     layout: "centered",

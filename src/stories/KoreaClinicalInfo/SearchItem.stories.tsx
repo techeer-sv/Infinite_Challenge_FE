@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { SearchItem } from "@/components/SearchSuggestion";
+import { SearchItem } from "@/domain/KoreaClinicalInfo/components/SearchSuggestion";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Components/SearchItem",
+  title: "KoreaClinicalInfo/SearchSuggestion/SearchItem",
   component: SearchItem,
   parameters: {
     layout: "centered",

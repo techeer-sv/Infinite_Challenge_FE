@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { RecommendSearch } from "@/components/SearchSuggestion";
+import { RecentSearch } from "@/domain/KoreaClinicalInfo/components/SearchSuggestion";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Components/RecommendSearch",
-  component: RecommendSearch,
+  title: "KoreaClinicalInfo/SearchSuggestion/RecentSearch",
+  component: RecentSearch,
   parameters: {
     layout: "centered",
   },
@@ -17,37 +17,31 @@ const meta = {
     ),
   ],
   argTypes: {
-    searchKeywords: {
-      control: "text",
-      description: "추천 검색어 목록",
-    },
-    recommendKeyWords: {
+    recentKeyWords: {
       control: "object",
-      description: "추천 검색어 목록",
+      description: "최근 검색어 목록",
     },
     onItemClick: {
       action: "clicked",
-      description: "추천 검색어 클릭 이벤트",
+      description: "최근 검색어 클릭 이벤트",
     },
   },
   args: {
     onItemClick: fn(),
   },
-} satisfies Meta<typeof RecommendSearch>;
+} satisfies Meta<typeof RecentSearch>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Exist: Story = {
   args: {
-    searchKeywords: "갑상",
-    recommendKeyWords: ["갑상선암", "갑상선염"],
+    recentKeyWords: ["갑상선암", "갑상선염"],
   },
 };
 
 export const None: Story = {
   args: {
-    searchKeywords: "갑상",
-    recommendKeyWords: [],
+    recentKeyWords: [],
   },
 };

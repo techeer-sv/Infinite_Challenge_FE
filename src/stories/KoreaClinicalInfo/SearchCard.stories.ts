@@ -3,7 +3,7 @@ import SearchCard from "@/components/SearchCard";
 import { fn } from "@storybook/test";
 
 const meta = {
-  title: "Components/SearchCard",
+  title: "KoreaClinicalInfo/SearchCard",
   component: SearchCard,
   parameters: {
     layout: "centered",
