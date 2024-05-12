@@ -3,6 +3,8 @@ import { LocationDataType, SearchDataType } from "../../../types";
 import { useAtom } from "jotai";
 import { favoriteResultsAtom } from "../../../store/favorites";
 
+// TODO: 새로고침 해도 즐겨찾기 유지하도록 변경하기
+// TODO: 즐겨찾기 없을 시 isEmpty UI 표시하기
 const ResultCard = ({ data }: { data: SearchDataType }) => {
   const [favorites, setFavorites] = useAtom(favoriteResultsAtom);
   const isFavorite = favorites.has(data.ct_id);
