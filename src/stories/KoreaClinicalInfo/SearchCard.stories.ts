@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import SearchCard from "@/components/SearchCard";
+import SearchCard from "@/domain/KoreaClinicalInfo/components/SearchCard";
 import { fn } from "@storybook/test";
 
 const meta = {

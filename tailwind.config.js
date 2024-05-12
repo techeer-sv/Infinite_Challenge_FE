@@ -28,9 +28,19 @@ export default {
             fontWeight: "400",
           },
         ],
+        xl: [
+          "34px",
+          {
+            fontSize: "34px",
+            lineHeight: "52px",
+            letterSpacing: "0",
+            fontWeight: "700",
+          },
+        ],
       },
       colors: {
         primary: "#007BE9",
+        secondary: "#CAE9FF",
         lightGray: "#EEF0F2",
         silver: "#BBBBBB",
         gray: "#90959A",

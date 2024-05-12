@@ -22,14 +22,20 @@ const SearchCard = ({
   width = "431px",
 }: ISearchCard) => {
   return (
-    <div className="bg-white rounded-lg p-5 space-y-4" style={{ width: width }}>
+    <div
+      className="bg-white border border-lightGray rounded-lg p-5 space-y-4"
+      style={{ width: width }}
+    >
       {/* 카드 상단 */}
       <div className="flex justify-between items-center">
         <p className="text-sm text-blueGray">{title}</p>
         <ToggleButton checked={toggleChecked} onClick={onToggleClick} />
       </div>
       {/* 설명 */}
-      <p className="font-bold" style={{ fontSize: "11.5px" }}>
+      <p
+        className="font-bold"
+        style={{ fontSize: "11.5px", minHeight: "60px" }}
+      >
         {description}
       </p>
 

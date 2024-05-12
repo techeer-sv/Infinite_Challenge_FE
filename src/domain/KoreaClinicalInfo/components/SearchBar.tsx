@@ -36,7 +36,7 @@ const SearchBar = ({ value, placeholder, onSubmit, onChange }: ISearchBar) => {
         <input
           value={value}
           type="text"
-          className="w-full text-base placeholder-white bg-transparent outline-none ml-2"
+          className="w-full text-base bg-transparent outline-none ml-2"
           placeholder={placeholder}
           onChange={onChange}
           onFocus={handleFocus}
