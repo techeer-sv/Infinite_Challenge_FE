@@ -4,12 +4,12 @@
 
 ## 5/12 11시 검색 기능 구현 시작
 
-- [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
+- [구현(feature) - Search](https://time-map.notion.site/feature-Search-e40e36aaded34919b68882095e69d3cf?pvs=4)
   - 검색어 추천 API 연결
 
 ## 5/12 10시 검색 기능 구현 시작
 
-- [구현 - Search](https://time-map.notion.site/Search-122dee3264194e9cb82c642a5cf2d99f?pvs=4)
+- [구현(feature) - Search](https://time-map.notion.site/feature-Search-e40e36aaded34919b68882095e69d3cf?pvs=4)
   - 검색 시 결과 리스트가 정상적으로 돌아오도록 하기
 
 ## 5/11 16시 결과 영역 구현 시작
