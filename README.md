@@ -2,10 +2,11 @@
 
 - [제작 문서(Notion)](https://time-map.notion.site/Techeer-5ecace250f2344e9a1e2a5cde3c64ffa?pvs=4)
 
-## 5/12 11시 검색 기능 구현 시작
+## 5/12 11시 검색 추천 API 연결
 
 - [구현(feature) - Search](https://time-map.notion.site/feature-Search-e40e36aaded34919b68882095e69d3cf?pvs=4)
   - 검색어 추천 API 연결
+  - 검색 결과 없을 때, default 화면 구성 완료
 
 ## 5/12 10시 검색 기능 구현 시작
 
