@@ -10,6 +10,17 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          width: "800px",
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
   args: { onClick: alert("클릭") },
 } as Meta<typeof SearchBar>;
 
