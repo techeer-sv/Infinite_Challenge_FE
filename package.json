@@ -10,13 +10,15 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=chpt_bc436d25f0df202"
+    "chromatic": "dotenv -e .env.local chromatic --project-token=env.CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.34.2",
     "@tanstack/react-query-devtools": "^5.35.1",
     "axios": "^1.6.8",
     "chromatic": "^11.3.2",
+    "dotenv": "^16.4.5",
+    "dotenv-cli": "^7.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.0",
