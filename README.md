@@ -74,8 +74,6 @@
 - 키보드만으로 추천 검색어들로 이동 가능하도록 구현
   - 검색창에서 onKeyDown 이벤트가 발생했을 때 event.key 값이 ArrowDown, ArrowUp일 경우 selectedIndex가 변경되게 했고 추천 검색어의 index와 selectedIndex가 같을 때 background-color가 변경되도록 구현.
 
-### 검색창
-=======
  
 ### 검색창
 ![2024-05-1010 09 48-ezgif com-video-to-gif-converter](https://github.com/Leeseunghwan7305/Infinite_Challenge_FE/assets/78102507/378ec5b8-452d-4c64-8147-4f8a909deea7)
