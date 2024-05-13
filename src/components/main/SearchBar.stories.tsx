@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from "@storybook/react";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
-import { userEvent, within } from "@storybook/test";
+import { fn, userEvent, within } from "@storybook/test";
 
 const meta = {
   title: "Components/SearchBar",
@@ -21,7 +21,7 @@ const meta = {
       </div>
     ),
   ],
-  args: { onClick: alert("클릭") },
+  args: { onClick: fn() },
 } as Meta<typeof SearchBar>;
 
 export default meta;
