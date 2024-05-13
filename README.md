@@ -13,6 +13,9 @@
 과제 요구 UI 
 [피그마](https://www.figma.com/design/2I7T132M48F6FbhJHwIB0r/Techeer-Infinite-Challenge-FE?node-id=0-1&t=jbsiLdOPrqVuuMqO-0)
 
+### 스토리북
+[스토리북](https://6641c1126df24c244d462699-hgqohmnawo.chromatic.com/?path=/story/components-searchbar--basic)
+
 ### 기술스택
 
 - React
