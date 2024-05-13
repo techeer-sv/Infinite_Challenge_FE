@@ -9,6 +9,10 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  // argTypes: {
+  //   type: "추천검색어",
+  // },
+  args: { onClick: fn() },
   decorators: [
     (Story) => (
       <div
@@ -16,14 +20,13 @@ const meta = {
           position: "absolute",
           top: 0,
           left: 0,
-          width: "100%",
+          width: "800px",
         }}
       >
         <Story />
       </div>
     ),
   ],
-  args: { onClick: fn() },
 } as Meta<typeof DropBox>;
 
 export default meta;
