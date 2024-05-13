@@ -55,5 +55,4 @@ export const Basic: Story = {
     toggleFavorites: () => {},
     location: "main",
   },
-  name: "main List", // Naming the story for clarity
 };

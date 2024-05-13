@@ -9,9 +9,6 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-  // argTypes: {
-  //   type: "추천검색어",
-  // },
   decorators: [
     (Story) => (
       <div
