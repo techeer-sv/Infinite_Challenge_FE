@@ -52,7 +52,5 @@ const sampleResults: ResultListType = {
 export const Basic: Story = {
   args: {
     searchResult: sampleResults,
-    toggleFavorites: () => {},
-    location: "main",
   },
 };
