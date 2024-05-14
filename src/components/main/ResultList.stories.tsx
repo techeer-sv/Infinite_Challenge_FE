@@ -2,6 +2,8 @@ import { Meta, StoryObj } from "@storybook/react";
 import ResultList from "./ResultList";
 import { ResultListType } from "@/src/types/searchResult";
 import { fn } from "@storybook/test";
+import BookmarkBorder from "../../common/Image/BookmarkBorder";
+import Bookmark from "../../common/Image/Bookmark";
 
 const meta = {
   title: "Components/ResultList",
@@ -52,10 +54,29 @@ const sampleResults: ResultListType = {
 export const Basic: Story = {
   args: {
     searchResult: sampleResults,
-    renderBookmark: ({ onClick, isFavorites }) => (
-      <button onClick={onClick} data-is-favorites={isFavorites}>
-        Bookmark
-      </button>
-    ),
+    renderBookmark: ({ onClick, isFavorites }) => {
+      return isFavorites ? (
+        <Bookmark
+          onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+            e.stopPropagation();
+            onClick(e);
+          }}
+          width="16"
+          height="16"
+          cursor="pointer"
+        />
+      ) : (
+        <BookmarkBorder
+          onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+            e.stopPropagation();
+            onClick(e);
+          }}
+          width="16"
+          height="16"
+          fill="#007BE9"
+          cursor="pointer"
+        />
+      );
+    },
   },
 };
