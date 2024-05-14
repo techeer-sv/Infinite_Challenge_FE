@@ -11,11 +11,14 @@ import {
   NO_FAVORITES_MESSAGE,
   NO_FAVORITES_MESSAGE_DESCRIPTION,
 } from "../constants/search";
+import Bookmark from "../common/Image/Bookmark";
+import BookmarkBorder from "../common/Image/BookmarkBorder";
 
 const Favorites = () => {
   const [favoritesLists, setFavoritesLists] = useState<ResultListType[]>([]);
   const { isOpen, closeModal, openModal } = useHandleModal();
   const [clickedIndex, setClickedIndex] = useState<number>(0);
+
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
@@ -30,6 +33,7 @@ const Favorites = () => {
     setFavoritesLists(newFavorites);
     closeModal();
   };
+
   return (
     <Page>
       <FavoritesLists>
@@ -37,12 +41,33 @@ const Favorites = () => {
           return (
             <ResultItem key={list.id} index={index}>
               <ResultList
-                location="favorites"
-                toggleFavorites={() => {
-                  setClickedIndex(index);
-                  openModal();
-                }}
                 searchResult={list}
+                renderBookmark={({ isFavorites }) =>
+                  isFavorites ? (
+                    <Bookmark
+                      onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                        e.stopPropagation();
+                        setClickedIndex(index);
+                        openModal();
+                      }}
+                      width="16"
+                      height="16"
+                      cursor="pointer"
+                    />
+                  ) : (
+                    <BookmarkBorder
+                      onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                        e.stopPropagation();
+                        setClickedIndex(index);
+                        openModal();
+                      }}
+                      width="16"
+                      height="16"
+                      fill="#007BE9"
+                      cursor="pointer"
+                    />
+                  )
+                }
               />
             </ResultItem>
           );

@@ -1,83 +1,44 @@
-import Bookmark from "../../common/Image/Bookmark";
-import BookmarkBorder from "../../common/Image/BookmarkBorder";
-import { ResultListType } from "../../types/searchResult";
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { ResultListType } from "../../types/searchResult";
 
 interface ResultProps {
   searchResult: ResultListType;
-  toggleFavorites: (searchResult?: ResultListType) => void | (() => void);
-  location: "main" | "favorites";
+  renderBookmark: (props: {
+    onClick: (e: React.MouseEvent<HTMLOrSVGElement>) => void;
+    isFavorites: boolean;
+  }) => React.ReactNode;
 }
 
-const ResultList = ({
-  location,
-  searchResult,
-  toggleFavorites,
-}: ResultProps) => {
+const ResultList = ({ searchResult, renderBookmark }: ResultProps) => {
   const [isFavorites, setIsFavorites] = useState<boolean>(false);
-
-  const gotoLink = (id: number) => {
-    window.location.href = `https://clinicaltrialskorea.com/studies/${id}`;
-  };
 
   useEffect(() => {
     const favorites = localStorage.getItem("favorites");
     if (favorites) {
       const favoritesData = JSON.parse(favorites);
-
-      const isExist = favoritesData?.some(
-        (item: ResultListType) => item.id === searchResult.id
+      setIsFavorites(
+        favoritesData.some(
+          (item: ResultListType) => item.id === searchResult.id
+        )
       );
-      if (isExist) {
-        setIsFavorites(true);
-      } else {
-        setIsFavorites(false);
-      }
     }
   }, [searchResult.id]);
 
+  const handleBookmarkClick = (e: React.MouseEvent<HTMLOrSVGElement>) => {
+    e.stopPropagation();
+    setIsFavorites((prev) => !prev);
+  };
+
   return (
-    <Wrapper onClick={() => gotoLink(searchResult.id)}>
+    <Wrapper
+      onClick={() =>
+        (window.location.href = `https://clinicaltrialskorea.com/studies/${searchResult.id}`)
+      }
+    >
       <Head>
         <Title>{searchResult.lead_sponsor_name}</Title>
-
-        {isFavorites ? (
-          <Bookmark
-            onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
-              e.stopPropagation();
-              if (location === "main") {
-                setIsFavorites((prev) => !prev);
-                toggleFavorites(searchResult);
-              }
-
-              if (location === "favorites") {
-                toggleFavorites();
-              }
-            }}
-            width="16"
-            height="16"
-            cursor={"pointer"}
-          />
-        ) : (
-          <BookmarkBorder
-            onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
-              e.stopPropagation();
-              if (location === "main") {
-                setIsFavorites((prev) => !prev);
-                toggleFavorites(searchResult);
-              }
-
-              if (location === "favorites") {
-                toggleFavorites();
-              }
-            }}
-            width="16"
-            height="16"
-            fill="#007BE9"
-            cursor={"pointer"}
-          />
-        )}
+        {renderBookmark({ onClick: handleBookmarkClick, isFavorites })}
       </Head>
       <Contents>{searchResult.title}</Contents>
       <Location>실시기관지역 | {searchResult.locations[0]?.city}</Location>

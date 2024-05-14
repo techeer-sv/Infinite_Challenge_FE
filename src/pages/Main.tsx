@@ -10,6 +10,8 @@ import NoResult from "../components/main/NoResult";
 import useSearchResult from "../hooks/useSearchResult";
 import ResultList from "../components/main/ResultList";
 import { ResultListType } from "../types/searchResult";
+import Bookmark from "../common/Image/Bookmark";
+import BookmarkBorder from "../common/Image/BookmarkBorder";
 
 const Main = () => {
   const {
@@ -47,9 +49,33 @@ const Main = () => {
             return (
               <ResultItem key={result.id} index={index}>
                 <ResultList
-                  location="main"
-                  toggleFavorites={() => toggleFavorites(result)}
                   searchResult={result}
+                  renderBookmark={({ onClick, isFavorites }) =>
+                    isFavorites ? (
+                      <Bookmark
+                        onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                          e.stopPropagation();
+                          onClick(e);
+                          toggleFavorites(result);
+                        }}
+                        width="16"
+                        height="16"
+                        cursor="pointer"
+                      />
+                    ) : (
+                      <BookmarkBorder
+                        onClick={(e: React.MouseEvent<HTMLOrSVGElement>) => {
+                          e.stopPropagation();
+                          onClick(e);
+                          toggleFavorites(result);
+                        }}
+                        width="16"
+                        height="16"
+                        fill="#007BE9"
+                        cursor="pointer"
+                      />
+                    )
+                  }
                 />
               </ResultItem>
             );
