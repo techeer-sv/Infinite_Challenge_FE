@@ -52,5 +52,10 @@ const sampleResults: ResultListType = {
 export const Basic: Story = {
   args: {
     searchResult: sampleResults,
+    renderBookmark: ({ onClick, isFavorites }) => (
+      <button onClick={onClick} data-is-favorites={isFavorites}>
+        Bookmark
+      </button>
+    ),
   },
 };
