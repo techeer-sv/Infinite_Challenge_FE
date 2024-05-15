@@ -1,4 +1,4 @@
-import {  useState } from "react"
+import {  useEffect, useState } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -34,7 +34,7 @@ const DropDownItem = styled.div`
 
 export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas: any[],handleSearch: (name:string)=>void}) =>{
   const [ focusIndex, setFocusIndex ] = useState<number>(-1)
-
+  const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
   const handleKeyPress = (event) =>{
     event.preventDefault()
@@ -48,17 +48,21 @@ export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas:
   }
   //TODO: 조건 조금더 상세하게
 
+  useEffect(()=>{
+    console.log(JSON.parse(localStorage.getItem('searchHistory')))
+  },[])
+
   return(
     <Container isFocus={isFocus} >
       {/* //TODO: 검색어 없음 구현하기 */}
-      <div>최근 검색어</div>
-      <div>최근 검색어가 없습니다</div>
-
+      {history.map((item,index)=>(
+        <DropDownItem key={index}>{item}</DropDownItem>
+      ))}
+      <div>추천 검색어</div>
       {datas.map((data,index)=>(
         <DropDownItem tabIndex={0} focused={index===focusIndex} onClick={()=>handleSearch(data.name)} onKeyDown={handleKeyPress} onFocus={()=>setFocusIndex(index)}  key={index}>{data.name}</DropDownItem>
       ))}
       {/* //TODO: 컴포넌트 만들어서 뺴기 */}
-      {/* //TODO: 최근 검색어 구현하기 */}
     </Container>
   )
 }

@@ -45,8 +45,6 @@ const ResultContainer = styled.div`
 
 export const MainPage = () =>{
   const [ searchData, setSearchData ] = useState<any[]>([])
-
-
   const handleSearchButton = (input:string) => {
     const encodedInput = encodeURIComponent(input);
     const fetchDatas =async () => {
@@ -70,8 +68,6 @@ export const MainPage = () =>{
     localStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
   }
   
-
-
   return(
     <Container>
       <SearchContainer>
