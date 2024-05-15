@@ -55,6 +55,7 @@ export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas:
   return(
     <Container isFocus={isFocus} >
       {/* //TODO: 검색어 없음 구현하기 */}
+      {history.length === 0 ? "검색어 없음":null}
       {history.map((item,index)=>(
         <DropDownItem key={index}>{item}</DropDownItem>
       ))}
