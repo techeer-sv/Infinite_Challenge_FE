@@ -2,7 +2,8 @@ import {  useState } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
-  width: 486px;
+  width: 100%;
+  height: ${props => props.isFocus ? '' : '0px'};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +32,7 @@ const DropDownItem = styled.div`
   }
 `
 
-export const DropDowns = ({datas,handleSearch,ref}:{datas: any[],handleSearch: (name:string)=>void},any) =>{
+export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas: any[],handleSearch: (name:string)=>void}) =>{
   const [ focusIndex, setFocusIndex ] = useState<number>(0)
 
 
@@ -47,7 +48,7 @@ export const DropDowns = ({datas,handleSearch,ref}:{datas: any[],handleSearch: (
   }
 
   return(
-    <Container ref={ref} >
+    <Container isFocus={isFocus} >
       {/* //TODO: 검색어 없음 구현하기 */}
       <div>최근 검색어</div>
       <div>최근 검색어가 없습니다</div>
@@ -57,7 +58,6 @@ export const DropDowns = ({datas,handleSearch,ref}:{datas: any[],handleSearch: (
       ))}
       {/* //TODO: 컴포넌트 만들어서 뺴기 */}
       {/* //TODO: 최근 검색어 구현하기 */}
-
     </Container>
   )
 }
