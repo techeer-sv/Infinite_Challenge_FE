@@ -32,11 +32,16 @@ const TestInput = styled.input`
   }
 `;
 
-export const SearchBar = ({ handleSearch }: any) => {
-  const [isFocus, setIsFocus] = useState(false);
+interface ISearchBarProp{
+  handleSearch:(input:string)=>void
+}
+
+
+export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+  const [placeholderValue , setPlacehodlerValue ] = useState<string>('질환명을 입력해주세요')
   const [input, setInput] = useState<string>('');
   const [data, setData] = useState<string[]>([]);
-
   const inputRef = useRef(null);
 
   const handleFocus = () => {
@@ -57,9 +62,9 @@ export const SearchBar = ({ handleSearch }: any) => {
       const encodedInput = encodeURIComponent(input);
       const fetchData = async () => {
         try {
+          console.info("calling api")
           const response = await axios.get(`/api/v1/search-conditions/?name=${encodedInput}`);
           setData(response.data);
-          console.info("calling api")
         } catch (error) {
           console.error(error);
         }
@@ -69,22 +74,46 @@ export const SearchBar = ({ handleSearch }: any) => {
       setData([])
     }
   }, [input]);
+
+  useEffect(()=>{
+    if(isFocus){
+      setPlacehodlerValue('')
+    }
+    if(!isFocus){
+      setPlacehodlerValue('질환명을 입력해주세요')
+    }
+  },[isFocus])
+
+  const handleClickDropDown = (value:string) =>{
+    handleSearch(value)
+    setInput(value)
+  }
+
+  //조건
+  //1.tab을 누르면 dropdown으로 focus가 가야함
+  //2. 추천 검색어를 누르거나 해서 검색을 진행하면 focus가 사라지고 input 변경 후 결과 보여줌
+
+  // const handleDownFocus = (event) =>{
+  //   if(event.key === "ArrowDown" || event.key ==="Tab"){
+
+  //   }
+  // }
   
-
-
   return (
     <Container>
       <SearchBarContainer>
         <TestInput
           value={input}
-          placeholder="질환명을 입력해주세요"
+          placeholder={placeholderValue}
           onChange={handleInput}
           onFocus={handleFocus}
           onBlur={handleBlur}
           ref={inputRef}
-        /> 
-        <button  onClick={() => handleSearch(input)}>검색 결과</button>
-        <DropDowns datas={data} handleSearch={handleSearch} />
+        />
+        <button onClick={() => handleSearch(input)}>검색 결과</button>
+
+        {isFocus && <DropDowns datas={data} handleSearch={handleClickDropDown}   />}
+        {/* //TODO: focus가 tab & 위아래 화살표로 자연스럽게 이동하며 이동하면서 input이 변경되어야함 */}
       </SearchBarContainer>
     </Container>
   );
