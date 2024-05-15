@@ -111,8 +111,7 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
           ref={inputRef}
         />
         <button onClick={() => handleSearch(input)}>검색 결과</button>
-
-        {isFocus && <DropDowns datas={data} handleSearch={handleClickDropDown}   />}
+        <DropDowns datas={data} handleSearch={handleClickDropDown}/>
         {/* //TODO: focus가 tab & 위아래 화살표로 자연스럽게 이동하며 이동하면서 input이 변경되어야함 */}
       </SearchBarContainer>
     </Container>

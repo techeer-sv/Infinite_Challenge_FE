@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { SearchBar} from "../components/SearchBar"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import axios from "axios"
 import { SearchResult } from "../components/SearchResult"
 
@@ -44,9 +44,9 @@ const ResultContainer = styled.div`
 
 
 export const MainPage = () =>{
-  const [ searchData, setSearchData ] = useState<any>([])
+  const [ searchData, setSearchData ] = useState<any[]>([])
 
-  const handleSearchButton = (input:any) => {
+  const handleSearchButton = (input:string) => {//검색에 대한 결과
     const encodedInput = encodeURIComponent(input);
     const fetchDatas =async () => {
       try {
@@ -60,6 +60,7 @@ export const MainPage = () =>{
     fetchDatas();
   }
 
+  //필요한 APICALL
 
   return(
     <Container>
@@ -71,6 +72,7 @@ export const MainPage = () =>{
         <SearchBar handleSearch={handleSearchButton}/>
       </SearchContainer>
       <ResultContainer>
+        {/* //내려보내줘야하는 정보 -> 검색 결과 */}
         {searchData.length === 0 ? "검색 결과 없음" : <SearchResult datas={searchData} /> }
       </ResultContainer>
     </Container>

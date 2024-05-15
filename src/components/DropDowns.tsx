@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -31,13 +31,12 @@ const DropDownItem = styled.div`
   }
 `
 
-export const DropDowns = ({datas,handleSearch}:{datas: any[],handleSearch: (name:string)=>void}) =>{
+export const DropDowns = ({datas,handleSearch,ref}:{datas: any[],handleSearch: (name:string)=>void},any) =>{
   const [ focusIndex, setFocusIndex ] = useState<number>(0)
 
 
   const handleKeyPress = (event) =>{
     event.preventDefault()
-
     if(event.key === "ArrowDown" || event.key ==="Tab"){
       setFocusIndex(focusIndex+1)
     }else if(event.key === "ArrowUp"){
@@ -48,8 +47,10 @@ export const DropDowns = ({datas,handleSearch}:{datas: any[],handleSearch: (name
   }
 
   return(
-    <Container>
+    <Container ref={ref} >
       {/* //TODO: 검색어 없음 구현하기 */}
+      <div>최근 검색어</div>
+      <div>최근 검색어가 없습니다</div>
 
       {datas.map((data,index)=>(
         <DropDownItem tabIndex={0} focused={index===focusIndex} onClick={()=>handleSearch(data.name)} onKeyDown={handleKeyPress} onFocus={()=>setFocusIndex(index)}  key={index}>{data.name}</DropDownItem>
