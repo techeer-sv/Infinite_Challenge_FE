@@ -33,7 +33,7 @@ const DropDownItem = styled.div`
 `
 
 export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas: any[],handleSearch: (name:string)=>void}) =>{
-  const [ focusIndex, setFocusIndex ] = useState<number>(0)
+  const [ focusIndex, setFocusIndex ] = useState<number>(-1)
 
 
   const handleKeyPress = (event) =>{
@@ -46,6 +46,7 @@ export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas:
       handleSearch(datas[focusIndex].name);
     }
   }
+  //TODO: 조건 조금더 상세하게
 
   return(
     <Container isFocus={isFocus} >

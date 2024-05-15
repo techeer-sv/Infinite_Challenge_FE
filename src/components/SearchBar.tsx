@@ -87,17 +87,14 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
   const handleClickDropDown = (value:string) =>{
     handleSearch(value)
     setInput(value)
+    setIsFocus(false)
   }
 
-  //조건
-  //1.tab을 누르면 dropdown으로 focus가 가야함
-  //2. 추천 검색어를 누르거나 해서 검색을 진행하면 focus가 사라지고 input 변경 후 결과 보여줌
-
-  // const handleDownFocus = (event) =>{
-  //   if(event.key === "ArrowDown" || event.key ==="Tab"){
-
-  //   }
-  // }
+  const handleClickButton = (value:string) =>{
+    handleSearch(value)
+    setIsFocus(false)
+  }
+  //TODO: 아래 방향키 눌러도 DropDown으로 이동하게 변경
   
   return (
     <Container>
@@ -112,7 +109,7 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
           onChange={handleInput}
           ref={inputRef}
         />
-        <button onClick={() => handleSearch(input)}>검색 결과</button>
+        <button onClick={() => handleClickButton(input)}>검색 결과</button>
         <DropDowns isFocus={isFocus} datas={data} handleSearch={handleClickDropDown}/>
         {/* //TODO: focus가 tab & 위아래 화살표로 자연스럽게 이동하며 이동하면서 input이 변경되어야함 */}
       </SearchBarContainer>

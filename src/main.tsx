@@ -5,8 +5,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { router } from './router.tsx';
 import { createGlobalStyle } from 'styled-components';
 
-// Create a client for react-query
-const queryClient = new QueryClient();
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
   html, body, div, span, applet, object, iframe,
@@ -71,6 +69,8 @@ const GlobalStyle = createGlobalStyle`
     
   }
 `
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root')!);
 root.render(

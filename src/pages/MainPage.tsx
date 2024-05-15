@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { SearchBar} from "../components/SearchBar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { SearchResult } from "../components/SearchResult"
 
@@ -46,21 +46,31 @@ const ResultContainer = styled.div`
 export const MainPage = () =>{
   const [ searchData, setSearchData ] = useState<any[]>([])
 
-  const handleSearchButton = (input:string) => {//검색에 대한 결과
+
+  const handleSearchButton = (input:string) => {
     const encodedInput = encodeURIComponent(input);
     const fetchDatas =async () => {
       try {
         console.info("calling api")
         const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
         setSearchData(response.data.results)
+        setNewSearchHistory(input)
       } catch (error) {
         console.log(error)
       }
     }
+    
     fetchDatas();
   }
 
-  //필요한 APICALL
+  const setNewSearchHistory = (input: string) => {
+    const searchHistory = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+    const filteredHistory = searchHistory.filter((item)=> item !==input);
+    const newSearchHistory = [input, ...filteredHistory]; 
+    localStorage.setItem('searchHistory', JSON.stringify(newSearchHistory));
+  }
+  
+
 
   return(
     <Container>
@@ -72,7 +82,6 @@ export const MainPage = () =>{
         <SearchBar handleSearch={handleSearchButton}/>
       </SearchContainer>
       <ResultContainer>
-        {/* //내려보내줘야하는 정보 -> 검색 결과 */}
         {searchData.length === 0 ? "검색 결과 없음" : <SearchResult datas={searchData} /> }
       </ResultContainer>
     </Container>
