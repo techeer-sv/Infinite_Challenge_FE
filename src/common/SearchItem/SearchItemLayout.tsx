@@ -1,13 +1,9 @@
 import classNames from "classnames/bind";
 import style from "./index.module.scss";
-import { ReactNode } from "react";
+import { StrictPropsWithChildren } from "@/types/StrictPropsWithChildren";
 
 const cx = classNames.bind(style);
 
-interface SearchItemLayoutProps {
-  children: ReactNode;
-}
-
-export default function SearchItemLayout({ children }: SearchItemLayoutProps) {
+export default function SearchItemLayout({ children }: StrictPropsWithChildren) {
   return <div className={cx("list-container")}>{children}</div>;
 }
