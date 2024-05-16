@@ -35,7 +35,7 @@
         },
         {
           name: "갑상선염증",
-          id: 4377,
+          id: 43772,
         },
         ...
       ];
@@ -156,8 +156,9 @@
   - 스타일 관련 라이브러리 (styled-components, emotion, UI kit, tailwind, antd 등)
   - HTTP Client (axios 등)
   - 이외 과제 구현에 필요한 외부 라이브러리
-  
+
 ## 📈 진행 요구사항
+
 - 미션은 [Infinite_Challenge_FE](https://github.com/techeer-sv/Infinite_Challenge_FE) 를 fork/clone해 시작한다.
 - 기능을 구현하기 전에 Infinite_Challenge_FE 레포지토리 하위에 README.md 파일을 생성해 구현할 기능 목록을 정리해 추가한다.
 - git의 commit 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위로 추가한다.
