@@ -5,30 +5,32 @@ import { formatDate } from "@/utils/formatDate";
 import bookmark from "@/assets/images/bookmark.svg";
 import { PageType } from "@/types/pageType";
 import bookmarkFill from "@/assets/images/bookmarkFill.svg";
-import { MouseEvent, useState } from "react";
+import { Dispatch, MouseEvent } from "react";
 import Modal from "../Modal";
 import useModal from "@/hooks/useModal";
+import { makeItemList } from "@/utils/makeItemList";
 
 const cx = classNames.bind(style);
 
 interface SearchItemProps {
+  bookmarks: SearchItemType[];
+  setBookmarks: Dispatch<React.SetStateAction<SearchItemType[]>>;
   searchItem: SearchItemType;
   isPage: PageType;
 }
 
-export default function SearchItem({ searchItem, isPage }: SearchItemProps) {
-  const mapItem: string[] = [];
-  searchItem.phases.map((phase) => {
-    mapItem.push(phase);
-  });
-  mapItem.push(searchItem.gender);
-
-  const [bookmarks, setBookmarks] = useState<SearchItemType[]>([]);
+export default function SearchItem({
+  bookmarks,
+  setBookmarks,
+  searchItem,
+  isPage,
+}: SearchItemProps) {
+  const mapItem = makeItemList(searchItem);
   const { isOpen, openModal, closeModal, deleteBookmark } = useModal({ searchItem, setBookmarks });
 
   const handleBookmark = (searchResult: SearchItemType, e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const currentBookmarks = JSON.parse(localStorage.getItem("bookmarksData") || "[]");
+    const currentBookmarks = bookmarks;
     setBookmarks(currentBookmarks);
 
     const exists = currentBookmarks.some(
@@ -84,7 +86,7 @@ export default function SearchItem({ searchItem, isPage }: SearchItemProps) {
           </div>
 
           <div className={cx("bottom-container")}>
-            <p className={cx("detail")}>실시기관지역 | </p>
+            <p className={cx("detail")}>실시기관지역 | {searchItem.locations[0]?.city || ""}</p>
             <time className={cx("detail")}>
               모집 마감일 | {formatDate(searchItem.completion_date)}
             </time>

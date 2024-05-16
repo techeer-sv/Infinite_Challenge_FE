@@ -4,19 +4,12 @@ import Header from "@/common/Header";
 import SearchItem from "@/common/SearchItem";
 import SearchItemLayout from "@/common/SearchItem/SearchItemLayout";
 import { SearchItemType } from "@/types/searchItemType";
-import { useEffect, useState } from "react";
+import useBookmark from "@/hooks/useBookmark";
 
 const cx = classNames.bind(style);
 
 export default function Bookmark() {
-  const [bookmarks, setBookmarks] = useState<SearchItemType[]>([]);
-
-  useEffect(() => {
-    const storedBookmarks = localStorage.getItem("bookmarksData");
-    if (storedBookmarks) {
-      setBookmarks(JSON.parse(storedBookmarks));
-    }
-  }, []);
+  const { bookmarks, setBookmarks } = useBookmark();
 
   return (
     <>
@@ -25,7 +18,13 @@ export default function Bookmark() {
       {bookmarks.length > 0 ? (
         <SearchItemLayout>
           {bookmarks.map((item: SearchItemType) => (
-            <SearchItem key={item.id} searchItem={item} isPage="bookmark" />
+            <SearchItem
+              key={item.id}
+              bookmarks={bookmarks}
+              setBookmarks={setBookmarks}
+              searchItem={item}
+              isPage="bookmark"
+            />
           ))}
         </SearchItemLayout>
       ) : (

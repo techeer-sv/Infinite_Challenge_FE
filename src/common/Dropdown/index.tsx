@@ -9,16 +9,16 @@ const cx = classNames.bind(style);
 
 interface DropdownProps {
   searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
-type RecommendedSearchType = {
+interface RecommendedSearchProps {
   id: number;
   name: string;
-};
+}
 
-export default function Dropdown({ searchValue }: DropdownProps) {
+export default function Dropdown({ searchValue, setSearchValue }: DropdownProps) {
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
-  const [recommendedSearches, setRecommendedSearches] = useState<RecommendedSearchType[]>([]);
   const [debouncedSearchValue, setDebouncedSearchValue] = useState<string>(searchValue);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Dropdown({ searchValue }: DropdownProps) {
     return () => clearTimeout(timerId);
   }, [searchValue]);
 
-  const { data } = useQuery({
+  const { data: recommendedSearches } = useQuery({
     queryKey: ["recommendedSearches", debouncedSearchValue],
     queryFn: async () => {
       const encodedSearchValue = encodeURIComponent(debouncedSearchValue);
@@ -50,11 +50,9 @@ export default function Dropdown({ searchValue }: DropdownProps) {
     enabled: !!debouncedSearchValue,
   });
 
-  useEffect(() => {
-    if (data) {
-      setRecommendedSearches(data);
-    }
-  }, [data]);
+  const onChangeSearchValue = (search: string) => {
+    setSearchValue(search);
+  };
 
   return (
     <div className={cx("container")}>
@@ -65,8 +63,13 @@ export default function Dropdown({ searchValue }: DropdownProps) {
             <p className={cx("separator")}>추천 검색어</p>
           </div>
           {recommendedSearches?.length > 0 ? (
-            recommendedSearches.map((search, index) => (
-              <DropdownItem key={index} searchValue={searchValue} search={search.name} />
+            recommendedSearches.map((search: RecommendedSearchProps) => (
+              <DropdownItem
+                key={search.id}
+                searchValue={searchValue}
+                search={search.name}
+                onClick={() => onChangeSearchValue(search.name)}
+              />
             ))
           ) : (
             <p className={cx("light-text")}>추천 검색어가 없습니다.</p>
@@ -76,7 +79,13 @@ export default function Dropdown({ searchValue }: DropdownProps) {
         <>
           <p className={cx("separator")}>최근 검색어</p>
           {recentSearches?.length > 0 ? (
-            recentSearches.map((search, index) => <DropdownItem key={index} search={search} />)
+            recentSearches.map((search, index) => (
+              <DropdownItem
+                key={index}
+                search={search}
+                onClick={() => onChangeSearchValue(search)}
+              />
+            ))
           ) : (
             <p className={cx("light-text")}>최근 검색어가 없습니다.</p>
           )}

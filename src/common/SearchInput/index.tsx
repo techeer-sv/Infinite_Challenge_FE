@@ -7,6 +7,7 @@ import Dropdown from "../Dropdown";
 import { SearchItemType } from "@/types/searchItemType";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const cx = classNames.bind(style);
 
@@ -24,6 +25,7 @@ export default function SearchInput({
   const inputRef = useRef<HTMLInputElement>(null);
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const focusInput = () => {
     inputRef.current?.focus();
@@ -43,10 +45,12 @@ export default function SearchInput({
       ];
       localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
       setIsFocused(false);
+      refetch();
+      navigate(`?search=${searchValue}`);
     }
   };
 
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["searchResult", searchValue],
     queryFn: async () => {
       const encodedSearchValue = encodeURIComponent(searchValue);
@@ -57,7 +61,7 @@ export default function SearchInput({
       console.info("calling api");
       return response.data;
     },
-    enabled: isClicked === true && searchValue.length > 0,
+    enabled: searchValue.length > 0 && isClicked,
   });
 
   useEffect(() => {
@@ -89,7 +93,7 @@ export default function SearchInput({
         <img className={cx("search-icon")} src={search} alt="search icon" />
       </button>
 
-      {isFocused && <Dropdown searchValue={searchValue} />}
+      {isFocused && <Dropdown searchValue={searchValue} setSearchValue={setSearchValue} />}
     </div>
   );
 }
