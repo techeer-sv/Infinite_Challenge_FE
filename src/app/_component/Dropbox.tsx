@@ -10,28 +10,29 @@ interface DropboxProps {
 export default function Dropbox({ inputValue }: DropboxProps) {
   const [data, setData] = useState("");
   useEffect(() => {
-    console.log(inputValue);
-    fetch(`/api/v1/search-conditions/?name=${inputValue}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
+    if (inputValue) {
+      fetch(`/api/searchConditions?searchTerm=${inputValue}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      .then((data) => {
-        console.info("calling api");
-        console.log(data);
-        setData(data);
-      })
-      .catch((error) => {
-        console.info("calling api");
-        console.error("Error:", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.info("calling api");
+          console.log(data);
+          setData(data);
+        })
+        .catch((error) => {
+          console.info("calling api");
+          console.error("Error:", error);
+        });
+    }
   }, [inputValue]);
 
   return (
