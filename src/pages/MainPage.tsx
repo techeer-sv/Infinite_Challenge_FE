@@ -51,6 +51,7 @@ export const MainPage = () =>{
       try {
         console.info("calling api")
         const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
+        console.log(response.data.results)
         setSearchData(response.data.results)
         setNewSearchHistory(input)
       } catch (error) {

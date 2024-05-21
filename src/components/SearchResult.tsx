@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { SearchItem } from "./SearchItem"
 
 const Container = styled.div`
   width: 1000px;
@@ -11,11 +12,9 @@ export const SearchResult = ({datas}:{datas: any[]}) =>{
   return(
     <Container>
       {datas.map((data,index)=>(
-        <div key={index}>{data.title}</div>
+        <SearchItem key={index} data={data}></SearchItem>
       ))}
-      {/* //TODO: 컴포넌트 만들어서 뺴기 */}
     </Container>
-
     //TODO: 무한 스크롤 작성하기
   )
 }

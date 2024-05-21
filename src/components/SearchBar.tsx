@@ -14,7 +14,6 @@ const SearchBarContainer = styled.div`
   border-radius: 42px;
   margin-top: 40px;
   position: relative;
-
   border: ${({ isFocused }) => isFocused ? "1px solid #007BE9" : "none"};
 `;
 
@@ -99,18 +98,21 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
   return (
     <Container>
       <SearchBarContainer  
-      tabIndex={0}         
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      // tabIndex={0}         
+      // onFocus={handleFocus}
+      // onBlur={handleBlur}
+      isFocused={isFocus}
       >
         <TestInput
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           value={input}
           placeholder={placeholderValue}
           onChange={handleInput}
           ref={inputRef}
         />
         <button onClick={() => handleClickButton(input)}>검색 결과</button>
-        <DropDowns isFocus={isFocus} datas={data} handleSearch={handleClickDropDown}/>
+        <DropDowns tabIndex={0} isFocus={isFocus} datas={data} handleSearch={handleClickDropDown}/>
         {/* //TODO: focus가 tab & 위아래 화살표로 자연스럽게 이동하며 이동하면서 input이 변경되어야함 */}
       </SearchBarContainer>
     </Container>

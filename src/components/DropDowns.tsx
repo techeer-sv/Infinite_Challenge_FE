@@ -57,7 +57,7 @@ export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas:
       {/* //TODO: 검색어 없음 구현하기 */}
       {history.length === 0 ? "검색어 없음":null}
       {history.map((item,index)=>(
-        <DropDownItem key={index}>{item}</DropDownItem>
+        <DropDownItem tabIndex={0} focused={index===focusIndex} onClick={()=>handleSearch(data.name)} onKeyDown={handleKeyPress} onFocus={()=>setFocusIndex(index)}  key={index}>{item}</DropDownItem>
       ))}
       <div>추천 검색어</div>
       {datas.map((data,index)=>(
