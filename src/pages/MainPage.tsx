@@ -3,6 +3,7 @@ import { SearchBar} from "../components/SearchBar"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { SearchResult } from "../components/SearchResult"
+import { NoItemPage } from "../components/NoItemPage"
 
 const Container = styled.div`
   width: 100vw;
@@ -79,7 +80,7 @@ export const MainPage = () =>{
         <SearchBar handleSearch={handleSearchButton}/>
       </SearchContainer>
       <ResultContainer>
-        {searchData.length === 0 ? "검색 결과 없음" : <SearchResult datas={searchData} /> }
+        {searchData.length === 0 ? <NoItemPage/> : <SearchResult datas={searchData} /> }
       </ResultContainer>
     </Container>
   )

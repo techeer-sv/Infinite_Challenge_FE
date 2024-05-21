@@ -112,7 +112,13 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
           ref={inputRef}
         />
         <button onClick={() => handleClickButton(input)}>검색 결과</button>
-        <DropDowns tabIndex={0} isFocus={isFocus} datas={data} handleSearch={handleClickDropDown}/>
+        {
+          input === '' ? 
+          <div></div> 
+          : 
+          <DropDowns tabIndex={0} isFocus={isFocus} datas={data} handleSearch={handleClickDropDown}/>
+        }
+        {/* TODO: input이 없으면 최근 검색어, 있으면 검색어를 보여줌  */}
         {/* //TODO: focus가 tab & 위아래 화살표로 자연스럽게 이동하며 이동하면서 input이 변경되어야함 */}
       </SearchBarContainer>
     </Container>
