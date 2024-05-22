@@ -15,7 +15,8 @@ const Container = styled.div`
   margin-top: 80px;
   position: absolute;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const DropDownItem = styled.div`
@@ -54,7 +55,6 @@ const AlertText = styled.div`
 `
 
 export const HistoryDropDown = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas: any[],handleSearch: (name:string)=>void}) =>{
-  // //TODO: 조건 조금더 상세하게
   return(
     <Container isFocus={isFocus} >
       <StyledText>최근 검색어</StyledText>

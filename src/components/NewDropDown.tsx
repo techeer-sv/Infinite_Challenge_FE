@@ -16,7 +16,8 @@ const Container = styled.div`
   margin-top: 80px;
   position: absolute;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `
 
 const DropDownItem = styled.div`

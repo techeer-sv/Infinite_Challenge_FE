@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { SearchBar} from "../components/SearchBar"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import axios from "axios"
 import { SearchResult } from "../components/SearchResult"
 import { NoItemPage } from "../components/NoItemPage"
