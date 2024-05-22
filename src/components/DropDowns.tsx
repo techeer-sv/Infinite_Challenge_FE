@@ -1,4 +1,3 @@
-import {  useEffect, useState } from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -33,24 +32,14 @@ const DropDownItem = styled.div`
 `
 
 export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas: any[],handleSearch: (name:string)=>void}) =>{
-  const [ focusIndex, setFocusIndex ] = useState<number>(-1)
-  const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+  // const history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
 
-  const handleKeyPress = (event) =>{
-    event.preventDefault()
-    if(event.key === "ArrowDown" || event.key ==="Tab"){
-      setFocusIndex(focusIndex+1)
-    }else if(event.key === "ArrowUp"){
-      setFocusIndex(focusIndex-1)
-    } else if (event.key === "Enter") {
-      handleSearch(datas[focusIndex].name);
-    }
-  }
-  //TODO: 조건 조금더 상세하게
 
-  useEffect(()=>{
-    console.log(JSON.parse(localStorage.getItem('searchHistory')))
-  },[])
+  // //TODO: 조건 조금더 상세하게
+
+  // useEffect(()=>{
+  //   console.log(JSON.parse(localStorage.getItem('searchHistory')))
+  // },[])
 
   return(
     <Container isFocus={isFocus} >
@@ -61,7 +50,7 @@ export const DropDowns = ({isFocus, datas,handleSearch}:{isFocus:boolean, datas:
       ))}
       <div>추천 검색어</div> */}
       {datas.map((data,index)=>(
-        <DropDownItem tabIndex={0} focused={index===focusIndex} onClick={()=>handleSearch(data.name)} onKeyDown={handleKeyPress} onFocus={()=>setFocusIndex(index)}  key={index}>{data.name}</DropDownItem>
+        <DropDownItem tabIndex={0} onClick={()=>handleSearch(data.name)} key={index}>{data.name}</DropDownItem>
       ))}
       {/* //TODO: 컴포넌트 만들어서 뺴기 */}
     </Container>
