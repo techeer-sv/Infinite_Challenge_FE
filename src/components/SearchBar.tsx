@@ -56,6 +56,7 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
   const inputRef = useRef(null);
   const [ focusIndex, setFocusIndex ] = useState<number>(-1)
 
+
   const handleInput = (e) => {
     if (["ArrowDown", "ArrowUp", "Enter", "Tab"].includes(e.key)) return;
     setIsFocus(true)
@@ -64,6 +65,8 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
     setFocusIndex(-1)
     console.log(e.target.value)
   };//onChange
+
+
 
   useEffect(()=>{
     const fetchData = async (query:string) => {
@@ -80,8 +83,13 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
         setData([]);
       }
     };
-    fetchData(searchInput)
-  },[searchInput])//searchInput이 변경시는 검색이 진행됨
+
+    const debounce = setTimeout(()=>{
+      return fetchData(searchInput);
+    },500);
+    return () => clearTimeout(debounce)
+  },[searchInput])
+
 
   const handleKeyPress = (event) =>{
     if(event.key === "ArrowDown" || event.key ==="Tab"){
@@ -160,7 +168,8 @@ export const SearchBar = ({ handleSearch }: ISearchBarProp) => {
         />
         <SearchButton onClick={() => handleClickButton(input)}>검색 결과</SearchButton>
         {
-          searchInput === '' ? 
+          searchInput === '' 
+          ? 
           <HistoryDropDown isFocus={isFocus} datas={history} handleSearch={handleClickDropDown} />
           : 
           <NewDropDown input={input} isFocus={isFocus} focusIndex={focusIndex} datas={data} handleSearch={handleClickDropDown} />

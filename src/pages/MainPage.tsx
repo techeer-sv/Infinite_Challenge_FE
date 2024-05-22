@@ -35,32 +35,24 @@ const ResultContainer = styled.div`
   align-items: center;
 `
 
-// const SearchBar = styled.div`
-//   width: 486px;
-//   height: 69.7px;
-//   background-color: #ffffff;
-//   border-radius: 42px;
-//   margin-top: 40px;
-// `
-
-
 export const MainPage = () =>{
   const [ searchData, setSearchData ] = useState<any[]>([])
   const handleSearchButton = (input:string) => {
-    const encodedInput = encodeURIComponent(input);
-    const fetchDatas =async () => {
-      try {
-        console.info("calling api")
-        const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
-        console.log(response.data.results)
-        setSearchData(response.data.results)
-        setNewSearchHistory(input)
-      } catch (error) {
-        console.log(error)
+    if(input !== ''){
+      const encodedInput = encodeURIComponent(input);
+      const fetchDatas =async () => {
+        try {
+          console.info("calling api")
+          const response = await axios.get(`/api/v1/studies/?offset=0&limit=10&conditions=${encodedInput}`);
+          console.log(response.data.results)
+          setSearchData(response.data.results)
+          setNewSearchHistory(input)
+        } catch (error) {
+          console.log(error)
+        }
       }
+      fetchDatas();
     }
-    
-    fetchDatas();
   }
 
   const setNewSearchHistory = (input: string) => {
