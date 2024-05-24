@@ -1,0 +1,30 @@
+.header {
+  width: 100%;
+  height: 5.6rem;
+
+  background-color: #ffffff;
+
+  box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.05);
+}
+
+.inner-header {
+  max-width: 100rem;
+  height: 100%;
+
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-items {
+  color: black;
+  font-size: 1.6rem;
+  transition: opacity 0.3s ease;
+}
+
+.nav-items:active {
+  opacity: 0.5;
+}
